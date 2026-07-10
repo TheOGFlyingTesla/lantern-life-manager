@@ -1,12 +1,12 @@
 # Lantern
 
-### A personal life manager for ChatGPT Work
+### A friendly way into agentic AI for everyday life
 
-> **Where your Lantern information lives:** each life area stays in its own private ChatGPT Project, while compact coordination snapshots are kept in your private ChatGPT Library. Library is part of your ChatGPT account, not a device-local folder. Google Drive and similar services are optional backup or automation tools—not Lantern's required Hub.
+Lantern helps you move beyond one-off ChatGPT conversations and start using AI as a practical system for getting your life moving. It gives you a friendly Life Manager, focused coordinators for the parts of life that matter, and a clear next step when school, work, job searching, money, home, appointments, and everything else begin competing for attention.
 
-Lantern helps you keep school, work, job searching, money, home, appointments, wellbeing, and other responsibilities moving without squeezing your whole life into one giant chat.
+Think of Lantern as a light in the dark when agentic AI sounds powerful but you have no idea where to begin. It helps you plan, research, prepare, organize, and follow through—without needing to code, understand GitHub, or learn agent architecture.
 
-It is free, open source, and designed for people who do not write software or use GitHub.
+It is free, open source, and designed for real people managing real lives.
 
 > Lantern is an unofficial community project. It is not affiliated with or endorsed by OpenAI.
 
@@ -25,7 +25,7 @@ After installation, say:
 
 Lantern will interview you one question at a time. You can skip anything, say “I don't know,” stop, and continue later.
 
-## What is Lantern?
+## How Lantern works
 
 Lantern gives you:
 
@@ -62,6 +62,8 @@ Lantern can recommend helpful built-in capabilities, apps, plugins, or Skills ba
 ## Privacy and control
 
 Lantern treats personal information as internal by default. It can privately research, organize, compare, and draft, but it asks immediately before consequential external actions such as sending, submitting, booking, purchasing, publishing, deleting important information, or sharing private material.
+
+Each life area stays in its own private ChatGPT Project, while compact coordination snapshots are kept in your private ChatGPT Library. Library is part of your ChatGPT account, not a device-local folder. Google Drive and similar services are optional backup or automation tools—not Lantern's required Hub.
 
 Lantern never needs passwords, authentication codes, government identifiers, or full financial account numbers. Review [Privacy and safety](docs/PRIVACY_AND_SAFETY.md) before adding sensitive information.
 
