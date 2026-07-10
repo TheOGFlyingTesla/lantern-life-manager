@@ -79,6 +79,28 @@ class ContentContractTests(unittest.TestCase):
 
         self.assertEqual(forbidden, [])
 
+    def test_project_kit_templates_match_runtime_templates(self):
+        for name in ("domain-snapshot.md", "work-request.md", "dashboard.md"):
+            runtime = (SKILL / "assets" / "templates" / name).read_bytes()
+            project = (
+                ROOT / "project-kit" / "templates" / name
+            ).read_bytes()
+
+            self.assertEqual(project, runtime)
+
+    def test_project_kit_preserves_manager_and_domain_boundaries(self):
+        manager = (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+        domain = (
+            ROOT / "project-kit" / "DOMAIN_COORDINATOR_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        self.assertIn("life manager", manager)
+        self.assertIn("separate project", manager)
+        self.assertIn("domain coordinator", domain)
+        self.assertIn("publish", domain)
+
 
 if __name__ == "__main__":
     unittest.main()
