@@ -11,7 +11,7 @@ class DocumentationTests(unittest.TestCase):
         text = (ROOT / "README.md").read_text(encoding="utf-8").casefold()
 
         for required in (
-            "what is lantern",
+            "how lantern works",
             "install",
             "project",
             "privacy",
