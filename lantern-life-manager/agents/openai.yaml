@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lantern"
+  short_description: "A personal life manager for ChatGPT Work"
+  default_prompt: "Use $lantern-life-manager to help me set up or coordinate my life."
