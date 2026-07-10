@@ -226,7 +226,7 @@ from scripts.privacy_scan import scan_text
 
 class PrivacyScanTests(unittest.TestCase):
     def test_detects_email_and_absolute_path(self):
-        findings = scan_text("email person@example.com path /Users/example/private.txt", "sample")
+        findings = scan_text("email person@example.com path /Users/example/private.txt", "sample")  # privacy-scan: allow
         self.assertTrue(any("email address" in item for item in findings))
         self.assertTrue(any("absolute local path" in item for item in findings))
 
@@ -255,7 +255,7 @@ import zipfile
 
 PATTERNS = (
     ("email address", re.compile(r"(?<![\w.-])[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}(?![\w.-])", re.I)),
-    ("absolute local path", re.compile(r"(?:/Users/|/Volumes/|[A-Z]:\\\\Users\\\\)")),
+    ("absolute local path", re.compile(r"(?:/Users/|/Volumes/|[A-Z]:\\\\Users\\\\)")),  # privacy-scan: allow
     ("credential-shaped value", re.compile(r"(?:sk-[A-Za-z0-9_-]{20,}|gh[oprsu]_[A-Za-z0-9]{20,})")),
     ("phone number", re.compile(r"(?<!\d)(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4}(?!\d)")),
 )
@@ -379,7 +379,7 @@ Expected: file-not-found failures.
 Run:
 
 ```bash
-python3 /Users/jonathancastillo/.codex/skills/.system/skill-creator/scripts/init_skill.py lantern-life-manager --path . --resources references,assets --interface display_name="Lantern" --interface short_description="A personal life manager for ChatGPT Work" --interface default_prompt="Help me set up or use Lantern to coordinate my life."
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/init_skill.py" lantern-life-manager --path . --resources references,assets --interface display_name="Lantern" --interface short_description="A personal life manager for ChatGPT Work" --interface default_prompt="Use $lantern-life-manager to help me set up or coordinate my life."
 ```
 
 Expected: `lantern-life-manager/SKILL.md` and `lantern-life-manager/agents/openai.yaml` created.
@@ -400,7 +400,7 @@ Expected: all tests pass.
 
 - [ ] **Step 6: Run the official Skill validator**
 
-Run: `python3 /Users/jonathancastillo/.codex/skills/.system/skill-creator/scripts/quick_validate.py lantern-life-manager`
+Run: `python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" lantern-life-manager`
 
 Expected: valid Skill result with exit code `0`.
 
@@ -647,7 +647,7 @@ Run:
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 /Users/jonathancastillo/.codex/skills/.system/skill-creator/scripts/quick_validate.py lantern-life-manager
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" lantern-life-manager
 python3 scripts/validate.py .
 python3 scripts/privacy_scan.py .
 python3 scripts/package.py
