@@ -38,7 +38,7 @@ If a request requires a consequential external action, prepare it but stop for e
 
 ## Publish snapshots
 
-Publish a fresh copy of `templates/domain-snapshot.md` after:
+Publish a fresh copy of the `domain-snapshot.md` template supplied to this Project after:
 
 - completing a meaningful deliverable;
 - changing the next action;
@@ -49,6 +49,8 @@ Publish a fresh copy of `templates/domain-snapshot.md` after:
 - ending a focused work session at a natural checkpoint.
 
 Use schema `lantern-domain/v1`, an absolute timestamp, a stable domain ID, and a filename like `lantern-[DOMAIN ID]-YYYYMMDDTHHMMSSZ.md`. Save it to ChatGPT Library when available. If automatic Library saving or retrieval fails, present the snapshot as a short copyable handoff and say what failed.
+
+If the template is missing, ask the user to attach or paste it. A separate Project cannot see files uploaded only to the Life Manager Project; do not silently invent a replacement schema.
 
 Never claim that this Project can wake or directly message the Life Manager. The snapshot is the handoff.
 

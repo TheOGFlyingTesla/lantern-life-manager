@@ -9,27 +9,56 @@ import zipfile
 
 VERSION = "1.0.0"
 FIXED_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
-SKIPPED_PARTS = {".DS_Store", "__pycache__"}
+SKILL_FILES = (
+    "SKILL.md",
+    "agents/openai.yaml",
+    "assets/templates/dashboard.md",
+    "assets/templates/domain-snapshot.md",
+    "assets/templates/onboarding-checkpoint.md",
+    "assets/templates/work-request.md",
+    "references/architecture.md",
+    "references/capability-setup.md",
+    "references/model-routing.md",
+    "references/onboarding.md",
+    "references/safety-and-permissions.md",
+)
+PROJECT_KIT_FILES = (
+    "DOMAIN_COORDINATOR_INSTRUCTIONS.md",
+    "LIFE_MANAGER_INSTRUCTIONS.md",
+    "START_HERE.md",
+    "templates/dashboard.md",
+    "templates/domain-snapshot.md",
+    "templates/onboarding-checkpoint.md",
+    "templates/work-request.md",
+)
 
 
-def _iter_files(source: Path) -> list[Path]:
-    return sorted(
-        path
-        for path in source.rglob("*")
-        if path.is_file()
-        and not any(part in SKIPPED_PARTS for part in path.parts)
-        and path.suffix.lower() not in {".pyc", ".pyo"}
-    )
+def _listed_files(source: Path, allowed_files: tuple[str, ...]) -> list[Path]:
+    files = [source / relative for relative in allowed_files]
+    missing = [path for path in files if not path.is_file()]
+    if missing:
+        relative = ", ".join(str(path.relative_to(source)) for path in missing)
+        raise FileNotFoundError(f"Missing reviewed release file(s): {relative}")
+    linked = [path for path in files if path.is_symlink()]
+    if linked:
+        relative = ", ".join(str(path.relative_to(source)) for path in linked)
+        raise ValueError(f"Release files must not be symlinks: {relative}")
+    return files
 
 
-def _write_zip(source: Path, prefix: str, output: Path) -> None:
+def _write_zip(
+    source: Path,
+    prefix: str,
+    output: Path,
+    allowed_files: tuple[str, ...],
+) -> None:
     with zipfile.ZipFile(
         output,
         mode="w",
         compression=zipfile.ZIP_DEFLATED,
         compresslevel=9,
     ) as archive:
-        for path in _iter_files(source):
+        for path in _listed_files(source, allowed_files):
             relative = path.relative_to(source).as_posix()
             info = zipfile.ZipInfo(f"{prefix}/{relative}", FIXED_TIMESTAMP)
             info.create_system = 3
@@ -59,8 +88,18 @@ def build_release(
     project_zip = output_dir / f"lantern-project-kit-v{version}.zip"
     checksums = output_dir / "SHA256SUMS"
 
-    _write_zip(root / "lantern-life-manager", "lantern-life-manager", skill_zip)
-    _write_zip(root / "project-kit", "lantern-project-kit", project_zip)
+    _write_zip(
+        root / "lantern-life-manager",
+        "lantern-life-manager",
+        skill_zip,
+        SKILL_FILES,
+    )
+    _write_zip(
+        root / "project-kit",
+        "lantern-project-kit",
+        project_zip,
+        PROJECT_KIT_FILES,
+    )
 
     lines = [
         f"{_sha256(path)}  {path.name}"

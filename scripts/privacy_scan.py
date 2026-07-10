@@ -17,7 +17,9 @@ PATTERNS = (
     ),
     (
         "absolute local path",
-        re.compile(r"(?:/Users/|/Volumes/|[A-Z]:\\Users\\)"),  # privacy-scan: allow
+        re.compile(
+            r"(?:/" + r"Users/|/" + r"Volumes/|[A-Z]:\\" + r"Users\\)"
+        ),
     ),
     (
         "credential-shaped value",
@@ -33,13 +35,6 @@ PATTERNS = (
 
 TEXT_SUFFIXES = {".md", ".txt", ".yaml", ".yml", ".json", ".py", ".toml"}
 SKIPPED_PARTS = {".git", ".worktrees", "__pycache__", "dist"}
-ALLOW_MARKER = "privacy-scan: allow"
-
-
-def _scannable_text(text: str) -> str:
-    return "\n".join(
-        line for line in text.splitlines() if ALLOW_MARKER not in line
-    )
 
 
 def scan_text(
@@ -48,17 +43,28 @@ def scan_text(
     forbidden_terms: tuple[str, ...] = (),
 ) -> list[str]:
     """Return redacted finding descriptions for text."""
-    scannable = _scannable_text(text)
     findings: list[str] = []
     for description, pattern in PATTERNS:
-        if pattern.search(scannable):
+        if pattern.search(text):
             findings.append(f"{label}: {description}")
 
-    lowered = scannable.casefold()
+    lowered = text.casefold()
     for term in forbidden_terms:
         if term and term.casefold() in lowered:
             findings.append(f"{label}: forbidden private term")
     return findings
+
+
+def load_forbidden_terms(path: Path) -> tuple[str, ...]:
+    """Load private names and organizations from an untracked local file."""
+    terms = tuple(
+        line.strip()
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    )
+    if not terms:
+        raise ValueError("Private terms file must contain at least one term.")
+    return terms
 
 
 def _scan_zip(path: Path, forbidden_terms: tuple[str, ...]) -> list[str]:
@@ -104,9 +110,30 @@ def main() -> int:
     )
     parser.add_argument("path", type=Path)
     parser.add_argument("--forbid", action="append", default=[])
+    parser.add_argument(
+        "--forbid-file",
+        type=Path,
+        help="Untracked newline-delimited private names and organizations.",
+    )
+    parser.add_argument(
+        "--release",
+        action="store_true",
+        help="Require a private-terms file for a public release scan.",
+    )
     args = parser.parse_args()
 
-    findings = scan_path(args.path, tuple(args.forbid))
+    if args.release and args.forbid_file is None:
+        parser.error("--release requires --forbid-file")
+    try:
+        file_terms = (
+            load_forbidden_terms(args.forbid_file)
+            if args.forbid_file is not None
+            else ()
+        )
+    except (OSError, ValueError) as error:
+        parser.error(str(error))
+
+    findings = scan_path(args.path, tuple(args.forbid) + file_terms)
     if findings:
         print("\n".join(findings))
         return 1

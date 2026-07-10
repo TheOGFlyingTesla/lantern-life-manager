@@ -69,9 +69,10 @@ Lantern never needs passwords, authentication codes, government identifiers, or 
 
 Lantern starts with GPT-5.6 Luna high for most ordinary work, moves to Luna extra high for deeper bounded work, uses Terra selectively where its strengths matter, and reserves Sol for consequential synthesis and final review. The guidance is dated and evidence-based because model behavior and plan limits change.
 
-## Recover, update, or remove Lantern
+## Recover, export, update, or remove Lantern
 
 - Say **Help me recover Lantern** if setup stopped, a chat disappeared, or information conflicts.
+- Say **Export my Lantern setup** to create a portable private bundle with the latest dashboard, snapshots, open requests, checkpoint, and setup instructions.
 - Download a newer release and follow the update steps in the [installation guide](docs/INSTALL.md).
 - Remove the installed Skill or delete the Lantern Project instructions to uninstall it. Your chats and Library files remain until you delete them yourself.
 

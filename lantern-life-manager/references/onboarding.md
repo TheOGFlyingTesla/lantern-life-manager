@@ -2,7 +2,9 @@
 
 ## Interview behavior
 
-Ask exactly one question at a time. Keep questions short, explain why only when useful, and accept “skip for now,” “I don't know,” or a partial answer. After each section, summarize the confirmed facts and preserve an onboarding checkpoint.
+Ask exactly one question at a time. Keep questions short, explain why only when useful, and accept “skip for now,” “I don't know,” or a partial answer.
+
+After each section, create a compact append-only onboarding checkpoint from `assets/templates/onboarding-checkpoint.md`. Use schema `lantern-onboarding/v1`, an absolute timestamp, and a filename like `lantern-onboarding-YYYYMMDDTHHMMSSZ.md`. Save it to ChatGPT Library when available. If saving fails, present it as a short copyable handoff and say what failed. Never overwrite an older checkpoint automatically.
 
 Start with: “What would make Lantern genuinely useful for you over the next few weeks?”
 

@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 import zipfile
@@ -28,6 +29,35 @@ class PackageTests(unittest.TestCase):
             with zipfile.ZipFile(project_zip) as archive:
                 self.assertIn(
                     "lantern-project-kit/LIFE_MANAGER_INSTRUCTIONS.md",
+                    archive.namelist(),
+                )
+
+    def test_unreviewed_files_cannot_enter_archives(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copied_root = Path(tmp) / "source"
+            shutil.copytree(ROOT, copied_root, ignore=shutil.ignore_patterns(".git", "dist"))
+            (copied_root / "lantern-life-manager" / "surprise.md").write_text(
+                "not reviewed",
+                encoding="utf-8",
+            )
+            (copied_root / "project-kit" / "surprise.md").write_text(
+                "not reviewed",
+                encoding="utf-8",
+            )
+
+            skill_zip, project_zip, _ = build_release(
+                copied_root,
+                Path(tmp) / "dist",
+            )
+
+            with zipfile.ZipFile(skill_zip) as archive:
+                self.assertNotIn(
+                    "lantern-life-manager/surprise.md",
+                    archive.namelist(),
+                )
+            with zipfile.ZipFile(project_zip) as archive:
+                self.assertNotIn(
+                    "lantern-project-kit/surprise.md",
                     archive.namelist(),
                 )
 

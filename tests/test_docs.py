@@ -16,6 +16,7 @@ class DocumentationTests(unittest.TestCase):
             "project",
             "privacy",
             "recover",
+            "export",
             "unofficial",
         ):
             self.assertIn(required, text)

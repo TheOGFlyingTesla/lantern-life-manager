@@ -52,6 +52,8 @@ lantern-life-manager/references/safety-and-permissions.md
                                         Approval and safety rules
 lantern-life-manager/assets/templates/domain-snapshot.md
                                         Versioned status template
+lantern-life-manager/assets/templates/onboarding-checkpoint.md
+                                        Resumable setup checkpoint
 lantern-life-manager/assets/templates/work-request.md
                                         Cross-Project request template
 lantern-life-manager/assets/templates/dashboard.md
@@ -214,7 +216,7 @@ git commit -m "Add Lantern repository validator"
 **Interfaces:**
 - Produces: `scan_text(text: str, label: str, forbidden_terms: tuple[str, ...] = ()) -> list[str]`
 - Produces: `scan_path(path: Path, forbidden_terms: tuple[str, ...] = ()) -> list[str]`
-- CLI: `python3 scripts/privacy_scan.py PATH [--forbid TERM ...]`, exit `0` when clean.
+- CLI: `python3 scripts/privacy_scan.py PATH [--forbid TERM ...] [--forbid-file PATH] [--release]`, exit `0` when clean. Release mode requires an untracked private-terms file.
 
 - [ ] **Step 1: Write failing privacy tests**
 
@@ -226,7 +228,8 @@ from scripts.privacy_scan import scan_text
 
 class PrivacyScanTests(unittest.TestCase):
     def test_detects_email_and_absolute_path(self):
-        findings = scan_text("email person@example.com path /Users/example/private.txt", "sample")  # privacy-scan: allow
+        sample = "email person" + "@example.com path /Us" + "ers/example/private.txt"
+        findings = scan_text(sample, "sample")
         self.assertTrue(any("email address" in item for item in findings))
         self.assertTrue(any("absolute local path" in item for item in findings))
 
@@ -255,7 +258,7 @@ import zipfile
 
 PATTERNS = (
     ("email address", re.compile(r"(?<![\w.-])[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}(?![\w.-])", re.I)),
-    ("absolute local path", re.compile(r"(?:/Users/|/Volumes/|[A-Z]:\\\\Users\\\\)")),  # privacy-scan: allow
+    ("absolute local path", re.compile(r"(?:/" + r"Users/|/" + r"Volumes/|[A-Z]:\\\\" + r"Users\\\\)")),
     ("credential-shaped value", re.compile(r"(?:sk-[A-Za-z0-9_-]{20,}|gh[oprsu]_[A-Za-z0-9]{20,})")),
     ("phone number", re.compile(r"(?<!\d)(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4}(?!\d)")),
 )
@@ -334,13 +337,14 @@ git commit -m "Add Lantern privacy scanner"
 - Create: `lantern-life-manager/references/model-routing.md`
 - Create: `lantern-life-manager/references/safety-and-permissions.md`
 - Create: `lantern-life-manager/assets/templates/domain-snapshot.md`
+- Create: `lantern-life-manager/assets/templates/onboarding-checkpoint.md`
 - Create: `lantern-life-manager/assets/templates/work-request.md`
 - Create: `lantern-life-manager/assets/templates/dashboard.md`
 - Create: `tests/test_content_contract.py`
 
 **Interfaces:**
 - `SKILL.md` routes setup, daily coordination, domain work, recovery, capability audit, and model selection to a one-level reference.
-- Templates implement `lantern-domain/v1`, `lantern-request/v1`, and `lantern-dashboard/v1`.
+- Templates implement `lantern-domain/v1`, `lantern-onboarding/v1`, `lantern-request/v1`, and `lantern-dashboard/v1`.
 
 - [ ] **Step 1: Write failing content-contract tests**
 
@@ -390,7 +394,7 @@ Write `SKILL.md` with only `name` and `description` in frontmatter; keep the bod
 
 Write the five references with no duplicated source-of-truth rules. Put the complete interview in `onboarding.md`, coordination mechanics in `architecture.md`, capability recommendations in `capability-setup.md`, dated GPT-5.6 guidance in `model-routing.md`, and guardrails in `safety-and-permissions.md`.
 
-Write the three templates with exact schemas from the approved design specification.
+Write the domain, work-request, and dashboard templates with exact schemas from the approved design specification. Add a compact `lantern-onboarding/v1` checkpoint template so the approved resumable interview has a durable contract.
 
 - [ ] **Step 5: Run the content and validator tests**
 
@@ -419,6 +423,7 @@ git commit -m "Build Lantern runtime skill"
 - Create: `project-kit/LIFE_MANAGER_INSTRUCTIONS.md`
 - Create: `project-kit/DOMAIN_COORDINATOR_INSTRUCTIONS.md`
 - Create: `project-kit/templates/domain-snapshot.md`
+- Create: `project-kit/templates/onboarding-checkpoint.md`
 - Create: `project-kit/templates/work-request.md`
 - Create: `project-kit/templates/dashboard.md`
 - Modify: `tests/test_content_contract.py`
@@ -431,7 +436,7 @@ git commit -m "Build Lantern runtime skill"
 
 ```python
     def test_project_kit_templates_match_runtime_templates(self):
-        for name in ("domain-snapshot.md", "work-request.md", "dashboard.md"):
+        for name in ("domain-snapshot.md", "onboarding-checkpoint.md", "work-request.md", "dashboard.md"):
             runtime = (ROOT / "lantern-life-manager" / "assets" / "templates" / name).read_bytes()
             project = (ROOT / "project-kit" / "templates" / name).read_bytes()
             self.assertEqual(project, runtime)
@@ -453,7 +458,7 @@ Expected: Project Kit file-not-found failures.
 
 - [ ] **Step 3: Write the Project Kit instructions and copy templates**
 
-Use human-readable instructions that ChatGPT can paste into each Project. Keep the manager responsible for cross-domain prioritization and the domain coordinator responsible for domain truth. Copy the three runtime templates byte-for-byte.
+Use human-readable instructions that ChatGPT can paste into each Project. Keep the manager responsible for cross-domain prioritization and the domain coordinator responsible for domain truth. Copy the four runtime templates byte-for-byte.
 
 - [ ] **Step 4: Run parity tests**
 
@@ -649,10 +654,10 @@ Run:
 python3 -m unittest discover -s tests -v
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" lantern-life-manager
 python3 scripts/validate.py .
-python3 scripts/privacy_scan.py .
+python3 scripts/privacy_scan.py . --release --forbid-file "$LANTERN_PRIVATE_TERMS_FILE"
 python3 scripts/package.py
-python3 scripts/privacy_scan.py dist/lantern-life-manager-v1.0.0.zip
-python3 scripts/privacy_scan.py dist/lantern-project-kit-v1.0.0.zip
+python3 scripts/privacy_scan.py dist/lantern-life-manager-v1.0.0.zip --release --forbid-file "$LANTERN_PRIVATE_TERMS_FILE"
+python3 scripts/privacy_scan.py dist/lantern-project-kit-v1.0.0.zip --release --forbid-file "$LANTERN_PRIVATE_TERMS_FILE"
 (cd dist && shasum -a 256 -c SHA256SUMS)
 git diff --check
 ```

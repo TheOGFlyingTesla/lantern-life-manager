@@ -7,6 +7,18 @@ SKILL = ROOT / "lantern-life-manager"
 
 
 class ContentContractTests(unittest.TestCase):
+    def test_global_untrusted_content_rule_loads_before_routing(self):
+        text = (SKILL / "SKILL.md").read_text(encoding="utf-8").casefold()
+        core = text.split("## route the request", 1)[0]
+
+        for required in (
+            "external content",
+            "untrusted data",
+            "disclose private data",
+            "bypass approval",
+        ):
+            self.assertIn(required, core)
+
     def test_skill_routes_every_core_workflow(self):
         text = (SKILL / "SKILL.md").read_text(encoding="utf-8").casefold()
 
@@ -40,6 +52,46 @@ class ContentContractTests(unittest.TestCase):
             "Supersedes",
         ):
             self.assertIn(required, text)
+
+    def test_domain_snapshot_matches_approved_compact_schema(self):
+        text = (
+            SKILL / "assets" / "templates" / "domain-snapshot.md"
+        ).read_text(encoding="utf-8")
+        fields = [
+            line
+            for line in text.splitlines()
+            if line.startswith("- ")
+        ]
+
+        self.assertEqual(
+            fields,
+            [
+                "- Schema: lantern-domain/v1",
+                "- Domain ID:",
+                "- Status: active | waiting | blocked | completed | archived",
+                "- Outcome:",
+                "- Current state:",
+                "- Done since last snapshot:",
+                "- Blockers or decisions needed:",
+                "- Next action:",
+                "- Important dates:",
+                "- Pending requests:",
+                "- Confidence: high | medium | low",
+                "- Last verified:",
+                "- Review after:",
+                "- Supersedes:",
+            ],
+        )
+
+    def test_dashboard_example_matches_header_width(self):
+        lines = (
+            SKILL / "assets" / "templates" / "dashboard.md"
+        ).read_text(encoding="utf-8").splitlines()
+        table = [line for line in lines if line.startswith("|")]
+
+        self.assertGreaterEqual(len(table), 3)
+        width = table[0].count("|")
+        self.assertTrue(all(line.count("|") == width for line in table))
 
     def test_architecture_uses_separate_projects_and_library_snapshots(self):
         text = (SKILL / "references" / "architecture.md").read_text(
@@ -80,13 +132,64 @@ class ContentContractTests(unittest.TestCase):
         self.assertEqual(forbidden, [])
 
     def test_project_kit_templates_match_runtime_templates(self):
-        for name in ("domain-snapshot.md", "work-request.md", "dashboard.md"):
+        for name in (
+            "domain-snapshot.md",
+            "work-request.md",
+            "dashboard.md",
+            "onboarding-checkpoint.md",
+        ):
             runtime = (SKILL / "assets" / "templates" / name).read_bytes()
             project = (
                 ROOT / "project-kit" / "templates" / name
             ).read_bytes()
 
             self.assertEqual(project, runtime)
+
+    def test_onboarding_checkpoint_and_recovery_are_durable(self):
+        onboarding = (SKILL / "references" / "onboarding.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        architecture = (SKILL / "references" / "architecture.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        manager = (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        for text in (onboarding, architecture, manager):
+            self.assertIn("onboarding checkpoint", text)
+            self.assertIn("lantern-onboarding/v1", text)
+        self.assertIn("newest valid onboarding checkpoint", architecture)
+
+    def test_project_kit_gives_domain_projects_their_templates(self):
+        start = (ROOT / "project-kit" / "START_HERE.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        install = (ROOT / "docs" / "INSTALL.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for text in (start, install):
+            self.assertIn("each domain project", text)
+            self.assertIn("domain-snapshot.md", text)
+            self.assertIn("work-request.md", text)
+            self.assertIn("cannot see files uploaded", text)
+
+    def test_portable_export_is_a_runtime_workflow(self):
+        skill = (SKILL / "SKILL.md").read_text(encoding="utf-8").casefold()
+        architecture = (SKILL / "references" / "architecture.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        manager = (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        self.assertIn("export", skill)
+        self.assertIn("references/architecture.md", skill)
+        for text in (architecture, manager):
+            self.assertIn("portable export", text)
+            self.assertIn("latest dashboard", text)
+            self.assertIn("open work requests", text)
 
     def test_project_kit_preserves_manager_and_domain_boundaries(self):
         manager = (

@@ -19,7 +19,7 @@
 
 | Domain | Status | Next action | Important date | Freshness |
 |---|---|---|---|---|
-| | | | | confirmed | stale | uncertain |
+| | | | | confirmed / stale / uncertain |
 
 ## Waiting and blocked
 

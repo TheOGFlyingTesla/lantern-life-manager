@@ -37,13 +37,17 @@ When snapshots conflict, prefer neither silently. Identify the disagreement, com
 
 When asked to recover:
 
-1. Find the newest valid dashboard, snapshots, and requests available.
+1. Find the newest valid onboarding checkpoint, dashboard, snapshots, and requests available.
 2. Separate confirmed facts from stale, uncertain, or contradictory material.
 3. Identify unfinished onboarding sections.
 4. Ask the smallest next question needed.
-5. Rebuild the dashboard and publish a new recovery snapshot.
+5. Rebuild the dashboard and publish a new `lantern-onboarding/v1` recovery checkpoint plus any changed domain snapshots.
 
 For a replacement coordinator, read Project instructions and the newest snapshot. For an old schema, preserve the original, create a migrated copy, record `Supersedes`, and ask before deleting anything.
+
+## Portable export
+
+When the user asks to export Lantern, create a portable export containing the latest dashboard, newest valid domain snapshots, open work requests, newest onboarding checkpoint, and the Life Manager and Domain Coordinator setup instructions. Include a short manifest that lists missing or stale items and the export time. Preserve the original files, exclude superseded duplicates unless requested, and keep confidential material out unless the user explicitly chooses to include it. Creating the private export is reversible; sharing it outside the user's private workspace requires exact-action approval.
 
 ## External storage
 

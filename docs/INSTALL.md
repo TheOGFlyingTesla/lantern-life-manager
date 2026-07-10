@@ -32,10 +32,10 @@ Use this path when the Skills menu is absent.
 3. Open `START_HERE.md`.
 4. Create a new ChatGPT Project named **Lantern — Life Manager**.
 5. Copy all of `LIFE_MANAGER_INSTRUCTIONS.md` into that Project's instructions.
-6. Upload the three template files or add them from ChatGPT Library.
+6. Upload the four template files or add them from ChatGPT Library.
 7. Start a chat inside the Project and say **Help me set up Lantern.**
 
-Lantern will recommend one Project per substantial active life area. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. The Life Manager will guide you one step at a time.
+Lantern will recommend one Project per substantial active life area. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. Then upload `domain-snapshot.md` and `work-request.md` to each domain Project, or paste their contents into a starter chat there. A separate domain Project cannot see files uploaded only to the Life Manager Project. The Life Manager will guide you one step at a time.
 
 ## During onboarding
 

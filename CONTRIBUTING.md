@@ -19,6 +19,8 @@ Thank you for helping make agentic life organization approachable to more people
 4. Run the complete test, validator, packaging, and privacy commands documented in the implementation plan.
 5. Describe user impact, validation, and any account-dependent behavior that remains unverified.
 
+For a public release, create an untracked newline-delimited file containing every personal name, organization, username, and other project-specific term used during development. Run each source and archive scan with `--release --forbid-file PATH`. Release mode fails closed when that file is missing or empty. Never commit the private-terms file.
+
 ## Writing style
 
 Use plain language, warmth, and honest limits. Explain technical terms only when the user needs them. Do not promise direct cross-Project messaging, automatic file updates, or app actions the platform does not expose.
