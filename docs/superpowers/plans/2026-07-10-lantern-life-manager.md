@@ -653,6 +653,7 @@ python3 scripts/privacy_scan.py .
 python3 scripts/package.py
 python3 scripts/privacy_scan.py dist/lantern-life-manager-v1.0.0.zip
 python3 scripts/privacy_scan.py dist/lantern-project-kit-v1.0.0.zip
+(cd dist && shasum -a 256 -c SHA256SUMS)
 git diff --check
 ```
 

@@ -2,6 +2,8 @@
 
 ### A personal life manager for ChatGPT Work
 
+> **Where your Lantern information lives:** each life area stays in its own private ChatGPT Project, while compact coordination snapshots are kept in your private ChatGPT Library. Library is part of your ChatGPT account, not a device-local folder. Google Drive and similar services are optional backup or automation tools—not Lantern's required Hub.
+
 Lantern helps you keep school, work, job searching, money, home, appointments, wellbeing, and other responsibilities moving without squeezing your whole life into one giant chat.
 
 It is free, open source, and designed for people who do not write software or use GitHub.
