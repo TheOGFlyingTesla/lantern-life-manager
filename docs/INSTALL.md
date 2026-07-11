@@ -2,7 +2,7 @@
 
 [Back to the Lantern overview](../README.md)
 
-You do not need GitHub knowledge. Download the newest release from the repository's **Releases** section, then choose the path that matches what you see in ChatGPT.
+You do not need GitHub knowledge. **Lantern itself does not require Git** and **Lantern itself does not require Python**; manual Skill upload and the Project Kit require no developer software on macOS or Windows.
 
 ## First: check for a Skills menu
 
@@ -14,20 +14,20 @@ If you see it, use the Skill path. If you do not, use the Project Kit path. Both
 
 ## Path A: install the Lantern Skill
 
-1. Download `lantern-life-manager-v1.0.0.zip` from the newest release.
+1. Download `lantern-life-manager-v1.1.0.zip` from the newest release.
 2. In ChatGPT, open **Profile → Skills → New skill → Upload from your computer**.
 3. Choose the ZIP without unzipping it.
 4. Review ChatGPT's scan result. Stop if ChatGPT blocks the package or shows an unexpected capability.
 5. Create a new Project named **Lantern — Life Manager**.
 6. Start a chat inside it and say **Help me set up Lantern.**
 
-The Skill is reusable across the separate Projects Lantern creates.
+The Skill is reusable across the separate Projects Lantern creates. After the minimum domain inventory, Lantern should prepare and verify the complete justified framework before drilling into any one domain.
 
 ## Path B: use the Lantern Project Kit
 
 Use this path when the Skills menu is absent.
 
-1. Download `lantern-project-kit-v1.0.0.zip` from the newest release.
+1. Download `lantern-project-kit-v1.1.0.zip` from the newest release.
 2. Unzip it by opening the downloaded file.
 3. Open `START_HERE.md`.
 4. Create a new ChatGPT Project named **Lantern — Life Manager**.
@@ -35,7 +35,16 @@ Use this path when the Skills menu is absent.
 6. Upload the four template files or add them from ChatGPT Library.
 7. Start a chat inside the Project and say **Help me set up Lantern.**
 
-Lantern will recommend one Project per substantial active life area. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. Then upload `domain-snapshot.md` and `work-request.md` to each domain Project, or paste their contents into a starter chat there. A separate domain Project cannot see files uploaded only to the Life Manager Project. The Life Manager will guide you one step at a time.
+### Open the Project Kit on macOS or Windows
+
+- **macOS:** double-click the ZIP in Downloads. Finder creates an extracted folder. Open `.md` instruction files in TextEdit or another plain-text editor, press **Command-A**, then **Command-C**.
+- **Windows:** right-click the ZIP, choose **Extract All**, and open the extracted folder. Open `.md` instruction files in Notepad or another plain-text editor, press **Ctrl-A**, then **Ctrl-C**. Do not try to upload files from inside the compressed ZIP view.
+
+In ChatGPT, open the target Project's **Project settings**, find its instructions field, and paste the entire instruction file. Replace `[DOMAIN NAME]` and `[DOMAIN ID]` before saving a domain Project. Upload each template to the Project that owns it and confirm the filename appears in that Project's files.
+
+To **verify the Project**, start a new chat there and ask: “What Lantern role, domain name, and domain ID do you have?” The Life Manager should identify itself as the Life Manager; a domain Project should report the values you entered. If it cannot, recheck the Project instructions before continuing.
+
+Lantern will recommend one Project per substantial active life area. It should prepare the complete Project list, stable domain IDs, coordinator instructions, templates, dashboard, and checkpoint before detailed domain work. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. Then upload `domain-snapshot.md` and `work-request.md` to each domain Project, or paste their contents into a starter chat there. A separate domain Project cannot see files uploaded only to the Life Manager Project. If manual actions are required, Lantern should give one consolidated numbered list and then verify the framework-ready checklist—not stop after every file and wait for “continue.”
 
 ## During onboarding
 
@@ -45,6 +54,14 @@ Lantern will recommend one Project per substantial active life area. For each do
 - Stop whenever you want. Say **Help me recover Lantern** when you return.
 
 Lantern should produce a useful dashboard and next-few-days plan before asking you to connect optional apps.
+
+## Optional: automate setup with Codex
+
+If ChatGPT Work cannot create the complete Project structure directly and you already use Codex, follow [Set up Lantern with Codex](CODEX_ASSISTED_SETUP.md). Codex should try direct download and its bundled runtimes first.
+
+The optional **Codex-assisted setup may require** prerequisites belonging to Codex or macOS. If Codex asks for Xcode Command Line Tools or Apple developer tools, it must explain the potentially large download before installation and offer the Project Kit as the no-toolchain alternative.
+
+Lantern's manual setup should not ask you to install Git, Python, Xcode, Apple developer tools, Homebrew, or another developer toolchain. Codex should try direct download and bundled workspace tools first. If Codex itself genuinely requires a platform prerequisite, it should explain the cost and offer the Project Kit before installing anything.
 
 ## Optional capabilities and apps
 

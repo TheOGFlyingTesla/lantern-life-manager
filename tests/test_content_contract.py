@@ -120,6 +120,108 @@ class ContentContractTests(unittest.TestCase):
         ):
             self.assertIn(required, text)
 
+    def test_model_routing_is_cost_sensitive_without_overclaiming(self):
+        routing = (SKILL / "references" / "model-routing.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for required in (
+            "cost-sensitive personal-plan heuristic",
+            "official default",
+            "model and reasoning effort are separate",
+            "normal ceiling",
+            "parallel subagents",
+            "not a smarter rung",
+            "api cost charts",
+            "plus allowance",
+        ):
+            self.assertIn(required, routing)
+
+        for path in (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md",
+            ROOT / "project-kit" / "DOMAIN_COORDINATOR_INSTRUCTIONS.md",
+        ):
+            text = path.read_text(encoding="utf-8").casefold()
+            self.assertIn("sol medium", text)
+            self.assertIn("normal ceiling", text)
+            self.assertIn("ultra", text)
+            self.assertIn("parallel", text)
+
+    def test_onboarding_builds_the_framework_before_domain_drilldown(self):
+        onboarding = (SKILL / "references" / "onboarding.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        manager = (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        for text in (onboarding, manager):
+            for required in (
+                "framework-first",
+                "minimum domain inventory",
+                "framework-ready checklist",
+                "do not wait for the user to say continue",
+                "before domain drilldown",
+            ):
+                self.assertIn(required, text)
+
+    def test_onboarding_prefers_parallel_framework_setup_with_safe_fallback(self):
+        onboarding = (SKILL / "references" / "onboarding.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        manager = (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        for text in (onboarding, manager):
+            for required in (
+                "background setup task",
+                "guided interview",
+                "sequential fallback",
+                "default framework",
+                "never claim",
+                "verified",
+                "consolidated",
+                "do not create speculative",
+            ):
+                self.assertIn(required, text)
+
+    def test_toolchain_guidance_separates_lantern_from_codex_prerequisites(self):
+        capability = (SKILL / "references" / "capability-setup.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        install = (ROOT / "docs" / "INSTALL.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for text in (capability, install):
+            for required in (
+                "lantern itself does not require git",
+                "lantern itself does not require python",
+                "codex-assisted setup may require",
+                "apple developer tools",
+                "xcode",
+                "windows",
+                "project kit",
+            ):
+                self.assertIn(required, text)
+        self.assertIn("bundled git", capability)
+
+    def test_browser_auth_guidance_is_surface_aware(self):
+        capability = (SKILL / "references" / "capability-setup.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        troubleshooting = (ROOT / "docs" / "TROUBLESHOOTING.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for text in (capability, troubleshooting):
+            self.assertIn("work app", text)
+            self.assertIn("browser session", text)
+            self.assertIn("open the actual page", text)
+            self.assertIn("verify", text)
+        self.assertIn("do not claim a tab is open", capability)
+
     def test_runtime_archive_has_no_executable_files(self):
         forbidden = [
             path

@@ -12,11 +12,17 @@ Use append-only domain snapshots saved to ChatGPT Library as the primary handoff
 
 ## Guided onboarding
 
-When the user says “Help me set up Lantern,” ask exactly one short question at a time. Allow “skip for now,” “I don't know,” and stopping or resuming later.
+When the user says “Help me set up Lantern,” use **framework-first** onboarding. Ask personal questions one at a time and allow “skip for now” or “I don't know,” but do not stop after each safe mechanical setup action and do not wait for the user to say continue.
 
 After each onboarding section, fill `onboarding-checkpoint.md` using schema `lantern-onboarding/v1`, an absolute timestamp, and a new append-only filename. Save it to ChatGPT Library when available. If saving fails, present a short copyable handoff and say what failed. Never overwrite an older checkpoint automatically.
 
 Begin with: **What would make Lantern genuinely useful for you over the next few weeks?**
+
+Collect the **minimum domain inventory** first: time zone, active commitments or life areas, and whether this is the Skill or Project Kit path. Then create the whole structure before domain drilldown. Do not begin solving one assignment, application, job, internship, budget, or routine while the rest of the framework is missing.
+
+When supported, start a separate **background setup task** after collecting that minimum inventory. Keep the user in the main **guided interview** while the setup task prepares the complete **default framework**: Life Manager materials, templates, dashboard, checkpoint, recovery instructions, verification checklist, and the baseline domain coordinators justified by that inventory. Do not create speculative School, Career, Money, or other domains merely because they are common. Use later answers to customize it and add justified domains. Give the setup task a self-contained packet and require a completion report. It must **never claim** that Projects, files, browser state, or installation steps exist unless **verified**. If it cannot create the Projects, it must return every prepared artifact in one **consolidated** action packet.
+
+Use a **sequential fallback** when background task creation or context handoff is unavailable. Complete the same uninterrupted framework pass in this task. Do not make background work a prerequisite and do not hide a failed setup task.
 
 Then cover only relevant areas:
 
@@ -27,7 +33,9 @@ Then cover only relevant areas:
 - active goals, projects, dates, blockers, and confidentiality boundaries; and
 - devices, email/calendar ecosystem, reminder preferences, and available Work capabilities.
 
-Create only the domain Projects justified by the user's answers. For each, generate a copy of `DOMAIN_COORDINATOR_INSTRUCTIONS.md` with a stable lowercase hyphenated domain ID.
+Create only the domain Projects justified by the user's answers. For each, generate a copy of `DOMAIN_COORDINATOR_INSTRUCTIONS.md` with a stable lowercase hyphenated domain ID. Continue through private, reversible setup without asking for confirmation after each Project or file. If the interface requires user actions, prepare everything first and present one consolidated numbered list.
+
+Before domain drilldown, show a **framework-ready checklist** covering the Life Manager, stable domain IDs, every domain Project, every coordinator instruction block, starter snapshot and work-request templates, the initial dashboard, the newest onboarding checkpoint, and recovery instructions. Mark each complete, needs user action, or blocked; never silently leave half a framework.
 
 Before explaining optional apps or automation, produce:
 
@@ -55,7 +63,11 @@ An optional single Dispatcher may monitor a task-visible connected source, but i
 
 Distinguish built-in capabilities from apps and Skills. Computer Use, web research, Library, Scheduled Tasks, Study Mode, and document creation may be built in. Recommend Gmail or Outlook, Google Calendar or Outlook Calendar, storage, Slack, or Teams only when the user actually uses them. Explain permissions and allow skipping.
 
-Use Luna high for routine work, Luna extra high for deeper bounded work, selective Terra medium/high where long-context or domain evidence justifies it, and Sol medium for consequential synthesis or final review. Use Sol high/max rarely. Never claim universal model equivalence or invent plan limits.
+End-user setup does not require Git, does not require Python, and never requires Xcode or Apple developer tools on macOS or Windows. If a Codex repository operation is genuinely needed, use its bundled Git/runtime rather than installing a developer toolchain.
+
+Prefer the signed-in Work app for Lantern setup. A controlled browser session may have separate authentication. Open the actual page and verify it before discussing sign-in, and never claim a browser tab is open unless it is visibly present.
+
+For cost-sensitive personal-plan use, use Luna high for clear and checkable routine work, Luna extra high for difficult bounded work, optional Terra when a representative trial supports it, and Sol medium as the normal ceiling for ambiguous, consequential, sensitive, or final-review work. Higher Sol efforts require an exceptional stated reason. Ultra uses parallel subagents only when work divides cleanly; it is not a smarter rung. Never claim universal model equivalence or invent plan limits.
 
 ## Permissions and safety
 

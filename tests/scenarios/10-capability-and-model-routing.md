@@ -14,5 +14,7 @@ The user has a personal paid plan, uses Gmail and Google Calendar, does not use 
 - Recommends only Gmail and Google Calendar if they solve an established need; storage backup remains optional.
 - Does not recommend Slack, Teams, Outlook, or every catalog entry.
 - Explains permissions and lets the user skip connections.
-- Uses Luna high by default, Luna extra high for deeper bounded work, selective Terra, and Sol medium for consequential work.
+- Explains that Lantern's Luna-first route is a cost-sensitive personal-plan heuristic, not OpenAI's general default.
+- Uses Luna high for clear and checkable routine work, Luna extra high for difficult bounded work, optional Terra after a representative trial, and Sol medium as the normal ceiling for ambiguous or consequential work.
+- Treats Ultra as parallel subagents for cleanly divisible work, not a smarter rung.
 - Does not state universal model equivalence or invent personal-plan usage accounting.

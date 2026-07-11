@@ -41,6 +41,32 @@ Scheduled and background capabilities vary. Tasks can pause, have plan limits, a
 
 Continue with ChatGPT Library snapshots. External storage and communication apps are optional. If the missing app was needed for an external action, Lantern must say the action did not happen.
 
+## Setup asks me to install Git, Python, Xcode, or Apple developer tools
+
+Lantern itself does not need them. The manual Skill-upload and Project Kit paths work without a developer toolchain. Codex-assisted setup can have separate Codex or macOS prerequisites. Say:
+
+> Stop before installing. Try direct download and Codex's bundled runtimes first. If Codex itself still requires this platform tool, explain its download and disk impact and offer the Project Kit alternative.
+
+If Codex verifies that Xcode Command Line Tools or Apple developer tools are genuinely required, the user may choose to install them. That is a Codex platform decision, not a Lantern requirement. On Windows, Apple tooling is irrelevant; use the available Codex runtime or Project Kit.
+
+## Lantern says a ChatGPT browser tab is open, but I cannot see it
+
+The signed-in Work app and a controlled browser session can be different. Lantern must open the actual page and verify it before asking you to sign in. It must not claim a tab is open when it is not visible.
+
+Ask Lantern to stay in the Work app for app-native setup. If a browser is truly required, say:
+
+> Open the actual page in the browser session, verify what is visible, and then explain whether that separate browser session needs sign-in.
+
+If no page opens, use the app-native or manual fallback instead of repeating a sign-in instruction.
+
+## Setup stopped with only part of the framework
+
+Say:
+
+> Finish Lantern's framework-first setup before domain drilldown. Prepare every remaining artifact, then show the framework-ready checklist and one consolidated list of actions I must perform.
+
+Lantern should preserve what already exists, complete or mark every required framework item, and only then begin detailed work in a domain.
+
 ## The recommended model is unavailable
 
 Use the closest available route and narrow the task. For important work, add a separate review pass. Do not assume a different model is equivalent without evidence.
