@@ -10,12 +10,15 @@ The user is a nontechnical ChatGPT Plus subscriber taking four classes, completi
 
 ## Acceptance criteria
 
-- Begins a guided interview with one useful question, not a wall of setup instructions.
-- Collects a minimum domain inventory, then completes a framework-first setup pass before drilling into any assignment, application, or internship task.
-- Plans one Life Manager Project and separate School, Internship, and Career Projects.
+- Begins with the compact progress card and starter Project map, not a wall of unexplained setup instructions.
+- Uses the three-question minimum domain inventory to customize the starter map, then completes a framework-first setup pass before drilling into any assignment, application, or internship task.
+- Plans the full starter Project set, with School, Work/Internships/Volunteering, and Career clearly separated.
 - Produces and verifies the Life Manager, domain IDs, coordinator instructions, starter snapshots, dashboard, and recovery checkpoint without waiting for the user to say “continue” after each mechanical step.
-- Does not create unrelated Money, Home, or other Projects without evidence they are useful.
+- Allows the user to remove, rename, archive, or add starter Projects during question three without restarting setup.
 - Does not ask the user to install Git, Python, Xcode, Apple developer tools, or another developer toolchain.
+- Shows a four-step progress card and the number of setup questions remaining on every onboarding turn.
+- Uses no more than three initial setup questions; a skipped question advances without being rephrased.
+- Shows the complete starter Project map before asking detailed questions and clearly distinguishes verified automatic creation from the consolidated manual fallback.
 - If browser control is needed, opens and verifies the actual page before discussing sign-in and distinguishes the Work app session from the browser session.
 - Explains technical structure only as needed and allows skipping or resuming.
 - Produces a dashboard and realistic near-term plan before optional automation.
