@@ -32,6 +32,18 @@ If newly installed Skills require a **fresh task**, create that task and start L
 
 Do not claim setup is underway merely because the ZIP was downloaded or the Skill was installed. Setup is underway only after Lantern has actually been invoked. If automatic invocation fails, state that clearly and show the exact prompt above—do not bury it among optional instructions.
 
+Codex must distinguish its local folder/repository Projects from ChatGPT Projects in Work. During Lantern setup, the requested Projects are ChatGPT Projects. If app-native controls or Computer Use are exposed, Codex should create and configure them itself and verify the visible sidebar. It should not merely recommend names or ask the novice to perform clicks that Codex can perform. If those controls are absent, it must say so plainly and provide one consolidated manual creation packet.
+
+Audit Computer Use before falling back. If it is present, announce that the cursor will move, ask the user not to use the mouse for a few minutes, and perform the setup. If it is absent, guide the user through enabling the official Computer Use capability in the current Codex capability/plugin interface. Computer Use is separate from Git, GitHub, Python, and Apple developer tools.
+
+Computer Use may be blocked from controlling the signed-in ChatGPT/Codex desktop app. When that happens, open and verify `https://chatgpt.com` in the controlled browser. If the separate browser session is signed out, use this friendly handoff:
+
+1. Say: **“I opened ChatGPT in the browser so I can build your Projects for you. Do you see the ChatGPT login page in the browser? If not, tell me and I’ll fix it.”**
+2. After the user confirms, say: **“Please sign in there. Tell me when you’re finished, and I’ll verify it before touching anything else.”**
+3. Verify that sign-in succeeded.
+4. Ask: **“Everything is ready. May I take control of the cursor for a few minutes to create and verify your Lantern Projects? You’ll see the mouse moving while I work.”**
+5. After permission, create and verify every starter Project. Codex—not the novice—performs the setup clicks.
+
 ## How Codex should work with ChatGPT Work
 
 The signed-in Work app and a controlled browser are different surfaces. Codex should prefer app-native controls when they are available. When browser control is necessary, it must:

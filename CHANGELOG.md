@@ -2,6 +2,15 @@
 
 All notable changes to Lantern are documented here.
 
+## 1.2.0 — 2026-07-11
+
+- Added a fixed four-step visual onboarding flow with a visible question count and a maximum of three initial questions.
+- Made skipping advance the setup instead of rephrasing or repeating the question.
+- Added the complete starter architecture: Life Manager, Personal, Home, Career & Job Search, Work/Internships/Volunteering, School & Learning, Finances, Appointments & Admin, Health & Wellbeing, and Relationships & Community.
+- Distinguished Codex repository Projects from ChatGPT Projects and required action-first creation through app controls or Computer Use when available.
+- Added the friendly browser authentication and cursor-control handoff required to create Projects through ChatGPT web.
+- Required Lantern to verify the sidebar and Project contents before claiming automatic setup succeeded.
+
 ## 1.1.1 — 2026-07-11
 
 - Prevented first-run setup from requesting GitHub Desktop, GitHub CLI, Git installation, repository cloning, or a GitHub account; public release assets now use anonymous or ordinary browser download.

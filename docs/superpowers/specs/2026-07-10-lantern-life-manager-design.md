@@ -55,7 +55,7 @@ Life Manager Project
 - **Domain coordinator:** A restartable role inside one domain Project. It maintains that area's current reality, outcomes, dates, blockers, requests, and next actions.
 - **Focused project chat:** A chat inside the appropriate domain Project for a concrete outcome such as an assignment, application, event, move, or deliverable.
 
-Every substantial domain receives its own Project. Lantern does not begin with all domains inside one Project and require a disruptive migration later. It creates only the domain Projects justified by the guided interview, and it can add more at any time.
+Every substantial domain receives its own Project. Lantern does not begin with all domains inside one Project and require a disruptive migration later. Version 1.2 begins with the standard starter Project map; the user can remove, rename, archive, or add Projects without reorganizing everything later.
 
 A coordinator is not a permanently running chat. It is a restartable role backed by durable state. A replacement chat can resume the role by reading the Project instructions, latest checkpoint, and pending requests.
 
@@ -123,7 +123,9 @@ The interview asks about current commitments in plural. It must support any numb
 
 It also asks for the user's time zone, recurring schedule, near-term capacity, planning preferences, accessibility needs they choose to share, and preferred level of reminders.
 
-Lantern uses framework-first onboarding. It first collects a minimum domain inventory—time zone, active commitments or life areas, and installation path—then completes the full justified architecture before domain drilldown. Personal questions are asked one at a time, but safe mechanical setup continues without waiting for the user to say “continue” after each Project, instruction block, or template.
+Lantern uses framework-first onboarding. It shows and begins preparing the standard starter Project map before the first personal answer, then uses at most three questions to customize it. Personal questions are asked one at a time, but safe mechanical setup continues without waiting for the user to say “continue” after each Project, instruction block, or template.
+
+Version 1.2 presents initial setup as four fixed visible steps with no more than three questions. It shows the complete starter Project map before questioning, treats skip as an advance, and distinguishes Codex folder/repository Projects from visible ChatGPT Projects. When authenticated app controls or Computer Use are available, Lantern performs and verifies Project creation; otherwise it gives one consolidated manual packet. Browser authentication uses a visible login-page confirmation and explicit cursor-control handoff.
 
 When the interface supports a separate task, Lantern starts a background setup task after that minimum inventory is known while the main task continues the guided interview. The setup task prepares the universal manager and templates plus only the baseline domain coordinators justified by that inventory, then returns a verification report. Common but unconfirmed domains are not created speculatively. Later answers customize the framework and add justified domains. It never claims Projects or interface state exist unless verified; unavailable cross-Project creation produces one consolidated manual action packet. A sequential fallback performs the identical framework pass in the main task when parallel task creation or reliable context handoff is unavailable.
 

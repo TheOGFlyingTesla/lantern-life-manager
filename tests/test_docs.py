@@ -89,11 +89,26 @@ class DocumentationTests(unittest.TestCase):
 
         for required in (
             "before the first personal answer",
-            "domain-neutral",
+            "starter project map",
             "background setup task",
             "sequential fallback",
         ):
             self.assertIn(required, onboarding)
+
+    def test_browser_project_setup_has_a_human_handoff(self):
+        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for required in (
+            "do you see the chatgpt login page in the browser",
+            "if not, tell me and i’ll fix it",
+            "please sign in there",
+            "verify that sign-in succeeded",
+            "may i take control of the cursor",
+            "create and verify",
+        ):
+            self.assertIn(required, guide)
 
     def test_relative_markdown_links_exist(self):
         paths = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))]

@@ -16,20 +16,20 @@ If you see it, use the Skill path. If you do not, use the Project Kit path. Both
 
 ## Path A: install the Lantern Skill
 
-1. Download `lantern-life-manager-v1.1.1.zip` from the newest release.
+1. Download `lantern-life-manager-v1.2.0.zip` from the newest release.
 2. In ChatGPT, open **Profile → Skills → New skill → Upload from your computer**.
 3. Choose the ZIP without unzipping it.
 4. Review ChatGPT's scan result. Stop if ChatGPT blocks the package or shows an unexpected capability.
 5. Create a new Project named **Lantern — Life Manager**.
 6. Start a chat inside it and say **Help me set up Lantern.**
 
-The Skill is reusable across the separate Projects Lantern creates. After the minimum domain inventory, Lantern should prepare and verify the complete justified framework before drilling into any one domain.
+The Skill is reusable across the separate Projects Lantern creates. Lantern shows the full starter map immediately, asks at most three setup questions, then prepares and verifies the complete framework before drilling into any one domain.
 
 ## Path B: use the Lantern Project Kit
 
 Use this path when the Skills menu is absent.
 
-1. Download `lantern-project-kit-v1.1.1.zip` from the newest release.
+1. Download `lantern-project-kit-v1.2.0.zip` from the newest release.
 2. Unzip it by opening the downloaded file.
 3. Open `START_HERE.md`.
 4. Create a new ChatGPT Project named **Lantern — Life Manager**.
@@ -46,7 +46,7 @@ In ChatGPT, open the target Project's **Project settings**, find its instruction
 
 To **verify the Project**, start a new chat there and ask: “What Lantern role, domain name, and domain ID do you have?” The Life Manager should identify itself as the Life Manager; a domain Project should report the values you entered. If it cannot, recheck the Project instructions before continuing.
 
-Lantern will recommend one Project per substantial active life area. It should prepare the complete Project list, stable domain IDs, coordinator instructions, templates, dashboard, and checkpoint before detailed domain work. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. Then upload `domain-snapshot.md` and `work-request.md` to each domain Project, or paste their contents into a starter chat there. A separate domain Project cannot see files uploaded only to the Life Manager Project. If manual actions are required, Lantern should give one consolidated numbered list and then verify the framework-ready checklist—not stop after every file and wait for “continue.”
+Lantern starts with the documented starter Project map—one Project per life area—which the user may remove from, rename, or extend. It should prepare the complete Project list, stable domain IDs, coordinator instructions, templates, dashboard, and checkpoint before detailed domain work. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. Then upload `domain-snapshot.md` and `work-request.md` to each domain Project, or paste their contents into a starter chat there. A separate domain Project cannot see files uploaded only to the Life Manager Project. If manual actions are required, Lantern should give one consolidated numbered list and then verify the framework-ready checklist—not stop after every file and wait for “continue.”
 
 ## During onboarding
 

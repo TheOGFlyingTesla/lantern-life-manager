@@ -29,7 +29,9 @@ After installation, say:
 
 > Help me set up Lantern.
 
-Lantern first asks only enough to identify the life areas that need coordination, then prepares and verifies the complete framework before drilling into any one area. Personal questions stay one at a time; safe mechanical setup continues without making you repeatedly say “continue.” You can skip anything, say “I don't know,” stop, and continue later.
+Lantern shows the complete starter Project map immediately, then asks at most three short setup questions so you can remove, rename, or add anything. It prepares and verifies the framework before drilling into any one area. You can skip anything, say “I don't know,” stop, and continue later.
+
+Initial setup always shows Step 1 of 4 through Step 4 of 4 and the number of questions remaining. Lantern shows the full starter Project map up front, uses no more than three initial questions, and uses Computer Use to create and verify the Projects when the authenticated browser capability is available.
 
 ## How Lantern works
 

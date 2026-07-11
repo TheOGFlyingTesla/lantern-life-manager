@@ -61,6 +61,8 @@ Ask Lantern to stay in the Work app for app-native setup. If a browser is truly 
 
 > Open the actual page in the browser session, verify what is visible, and then explain whether that separate browser session needs sign-in.
 
+If Computer Use cannot control the signed-in desktop app, it should use the verified browser page instead. Complete only the browser sign-in yourself; after that, Lantern should create and configure the Projects rather than handing the clicks back to you.
+
 If no page opens, use the app-native or manual fallback instead of repeating a sign-in instruction.
 
 ## Setup stopped with only part of the framework

@@ -182,7 +182,49 @@ class ContentContractTests(unittest.TestCase):
                 "never claim",
                 "verified",
                 "consolidated",
-                "do not create speculative",
+                "starter project map",
+            ):
+                self.assertIn(required, text)
+
+    def test_onboarding_is_bounded_visual_and_skip_safe(self):
+        onboarding = (SKILL / "references" / "onboarding.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        manager = (
+            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        for text in (onboarding, manager):
+            for required in (
+                "step 1 of 4",
+                "questions remaining",
+                "no more than three",
+                "skipped means skipped",
+                "life manager",
+                "personal",
+                "home",
+                "career & job search",
+                "work, internships & volunteering",
+                "school & learning",
+                "finances",
+                "appointments & admin",
+                "health & wellbeing",
+                "relationships & community",
+                "automatic project creation is unavailable",
+                "consolidated",
+                "computer use",
+                "codex project",
+                "chatgpt project",
+                "perform the creation actions",
+                "verify the sidebar",
+                "take control of the mouse cursor",
+                "you may see things moving on the screen",
+                "computer use is already available",
+                "enable the official computer use capability",
+                "do you see the chatgpt login page in the browser",
+                "if not, tell me and i’ll fix it",
+                "please sign in there",
+                "may i take control of the cursor",
             ):
                 self.assertIn(required, text)
 
