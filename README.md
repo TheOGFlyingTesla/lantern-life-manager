@@ -6,6 +6,8 @@ Lantern helps you move beyond one-off ChatGPT conversations and start using AI a
 
 Think of Lantern as a light in the dark when agentic AI sounds powerful but you have no idea where to begin. It helps you plan, research, prepare, organize, and follow through—without needing to code, understand GitHub, or learn agent architecture.
 
+Lantern itself and its manual Project Kit do not require Git, Python, Xcode, Apple developer tools, or another developer toolchain on macOS or Windows. The optional Codex-assisted path may have Codex/macOS prerequisites, which should be disclosed before installation.
+
 It is free, open source, and designed for real people managing real lives.
 
 > Lantern is an unofficial community project. It is not affiliated with or endorsed by OpenAI.
@@ -19,11 +21,13 @@ Download the newest release from this repository's **Releases** section. You wil
 
 Follow the friendly [installation guide](docs/INSTALL.md). You do not need to understand the files inside the ZIP.
 
+If ChatGPT Work cannot build the multi-Project structure directly, use the [Codex-assisted setup guide](docs/CODEX_ASSISTED_SETUP.md). It tries direct download and Codex's bundled tools first. Some Codex installations may still require a disclosed operating-system prerequisite; the guide also preserves a no-developer-tool Project Kit path.
+
 After installation, say:
 
 > Help me set up Lantern.
 
-Lantern will interview you one question at a time. You can skip anything, say “I don't know,” stop, and continue later.
+Lantern first asks only enough to identify the life areas that need coordination, then prepares and verifies the complete framework before drilling into any one area. Personal questions stay one at a time; safe mechanical setup continues without making you repeatedly say “continue.” You can skip anything, say “I don't know,” stop, and continue later.
 
 ## How Lantern works
 
@@ -69,7 +73,7 @@ Lantern never needs passwords, authentication codes, government identifiers, or 
 
 ## Model use and cost
 
-Lantern starts with GPT-5.6 Luna high for most ordinary work, moves to Luna extra high for deeper bounded work, uses Terra selectively where its strengths matter, and reserves Sol for consequential synthesis and final review. The guidance is dated and evidence-based because model behavior and plan limits change.
+For cost-sensitive personal-plan users, Lantern starts with GPT-5.6 Luna high when work is clear and checkable, moves to Luna extra high for difficult bounded work, and uses Sol medium as the normal ceiling for ambiguity, consequence, sensitivity, or final review. Terra remains an optional all-rounder, not a required step. Higher Sol efforts are exceptional; Ultra is only for cleanly divisible parallel work. This Lantern heuristic differs from OpenAI's general default and never assumes API cost charts equal ChatGPT Plus allowance use.
 
 ## Recover, export, update, or remove Lantern
 

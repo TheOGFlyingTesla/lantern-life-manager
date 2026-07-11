@@ -123,9 +123,15 @@ The interview asks about current commitments in plural. It must support any numb
 
 It also asks for the user's time zone, recurring schedule, near-term capacity, planning preferences, accessibility needs they choose to share, and preferred level of reminders.
 
-For each relevant area, Lantern asks only enough to establish current reality, important dates, active outcomes, constraints, and the next useful action. A user can say “skip for now,” “I don't know,” or stop and resume later.
+Lantern uses framework-first onboarding. It first collects a minimum domain inventory—time zone, active commitments or life areas, and installation path—then completes the full justified architecture before domain drilldown. Personal questions are asked one at a time, but safe mechanical setup continues without waiting for the user to say “continue” after each Project, instruction block, or template.
 
-The interview creates the Life Manager Project and the relevant domain Projects. Where the platform exposes an approved creation action, Lantern may offer to perform the setup. Otherwise it gives one short instruction at a time. On accounts without installable Skills, each new Project receives the generated Lantern Project instructions and starter checkpoint.
+When the interface supports a separate task, Lantern starts a background setup task after that minimum inventory is known while the main task continues the guided interview. The setup task prepares the universal manager and templates plus only the baseline domain coordinators justified by that inventory, then returns a verification report. Common but unconfirmed domains are not created speculatively. Later answers customize the framework and add justified domains. It never claims Projects or interface state exist unless verified; unavailable cross-Project creation produces one consolidated manual action packet. A sequential fallback performs the identical framework pass in the main task when parallel task creation or reliable context handoff is unavailable.
+
+For each relevant area, Lantern later asks only enough to establish current reality, important dates, active outcomes, constraints, and the next useful action. A user can say “skip for now,” “I don't know,” or stop and resume later.
+
+The framework pass creates or prepares the Life Manager Project, stable domain IDs, every relevant domain Project, coordinator instructions, starter templates, initial dashboard, onboarding checkpoint, and recovery path. Where the platform exposes an approved creation action, Lantern performs the private reversible setup under the user's setup request. Otherwise it prepares everything first and gives one consolidated numbered action packet. On accounts without installable Skills, each new Project receives the generated Lantern Project instructions and starter checkpoint.
+
+Before domain drilldown, Lantern renders a framework-ready checklist and marks every required item complete, needs user action, or blocked. It never claims setup is complete while required pieces are silently missing.
 
 The first useful output is:
 
@@ -138,6 +144,10 @@ The first useful output is:
 ## 7. Capability and app setup
 
 Onboarding includes a capability check. Lantern distinguishes built-in capabilities from installable Skills and connected apps.
+
+Lantern itself and the manual Project Kit require no Git, Python, Xcode, Apple developer tools, package manager, or browser extension on macOS or Windows. Repository tooling is maintainer-only. Codex-assisted setup may carry Codex or operating-system prerequisites. It tries direct download and bundled Git/Python first; if Codex still verifies a platform-tool requirement, it discloses the potentially large installation and preserves the no-toolchain Project Kit choice.
+
+The signed-in Work app and a controlled browser are separate surfaces. Lantern prefers app-native setup, opens and verifies an actual browser page before discussing sign-in, never claims an unseen tab exists, and explains when a separate browser session lacks the Work app's authentication.
 
 ### Built-in capabilities to use when available
 
@@ -270,14 +280,14 @@ Lantern chooses the least expensive model and effort level that can complete the
 
 The initial GPT-5.6 routing recommendation is:
 
-- **Luna high:** default for capture, coordination, summaries, ordinary research, reminders, routine planning, checkpoint maintenance, and most conversational work.
-- **Luna extra high:** complex but bounded analysis, drafting, comparison, and planning when Luna high misses constraints or needs a deeper pass.
-- **Terra medium or high:** selective use for workloads where current evaluations show a material advantage over Luna, including long-context retrieval, finance, science/health, and some computer-use tasks.
-- **Sol medium:** consequential cross-domain decisions, difficult synthesis, final review, and work where mistakes create meaningful cost or harm.
-- **Sol high or max:** rare, explicitly justified work where additional reliability is worth the usage.
-- **Ultra:** never required for Lantern; optional only where available and where parallel work materially helps.
+- **Luna high:** the cost-sensitive personal-plan default for clear, repeatable, and checkable capture, coordination, structured summaries, checkpoint maintenance, routine planning, and bounded research.
+- **Luna extra high:** difficult but bounded and constraint-heavy work with a clear finish line and a result that can be verified.
+- **Terra medium or high:** an optional all-rounder when a representative trial shows Luna is insufficient but the work does not need Sol's deeper open-ended judgment; it is not a mandatory rung.
+- **Sol medium:** the normal ceiling for ambiguous, consequential, sensitive, cross-domain, or high-cost-of-error work and final review.
+- **Sol high, extra high, or max:** exceptional, explicitly justified work where additional depth is worth the usage; return to a lower route afterward.
+- **Ultra:** never required for Lantern; it uses parallel subagents only when work divides cleanly and is not simply a smarter rung.
 
-The directional cost evidence supports using Luna broadly and escalating directly to Sol medium for many demanding tasks. However, Lantern must not state that one model/effort pair is universally “as smart as” another. Current benchmarks show task-dependent differences, and API per-token prices do not by themselves prove how a ChatGPT Plus usage allowance is consumed.
+OpenAI's general guidance describes Sol for complex open-ended work, Terra as the everyday workhorse, and Luna for clear repeatable work, with Sol as the official default when someone is unsure. Lantern's Luna-first route is a deliberate heuristic for cost-sensitive personal-plan users, not a claim that Luna is the general default. Model choice and reasoning effort are separate axes. The directional cost evidence supports using Luna for well-scoped work and escalating directly to Sol medium when ambiguity demands stronger judgment. Lantern must not state that one model/effort pair is universally “as smart as” another. Current benchmarks are task-dependent, coding-agent index thresholds do not generalize to everyday-life work, and API cost charts do not map one-to-one to ChatGPT Plus allowance consumption.
 
 Lantern records the dated routing guidance in documentation and recommends revisiting it when OpenAI changes model tiers, effort settings, usage accounting, or published evaluations.
 

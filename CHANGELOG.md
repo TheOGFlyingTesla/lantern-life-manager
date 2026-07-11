@@ -2,6 +2,16 @@
 
 All notable changes to Lantern are documented here.
 
+## 1.1.0 — 2026-07-11
+
+- Added framework-first onboarding: complete and verify the Life Manager/domain architecture before detailed domain work, without repeated “continue” prompts for mechanical setup.
+- Added parallel first-run setup when supported: a background task prepares the default framework while the main task continues the guided interview, with verified completion, a consolidated manual packet, and a sequential fallback.
+- Separated Lantern's no-code requirements from optional Codex/macOS prerequisites: direct download and bundled runtimes come first, while any verified large platform-tool installation must be disclosed with the Project Kit fallback.
+- Added surface-aware browser guidance that distinguishes the signed-in Work app from separate browser authentication and requires opening and verifying a real page before sign-in instructions.
+- Clarified Lantern's cost-sensitive personal-plan routing: Luna High for clear checkable work, Luna Extra High for difficult bounded work, and Sol Medium as the normal ceiling for ambiguity or consequence.
+- Reframed Terra as an optional all-rounder, higher Sol efforts as exceptional, and Ultra as parallel-subagent mode rather than a smarter rung.
+- Distinguished Lantern's heuristic from OpenAI's general default and from API-cost or coding-benchmark claims about ChatGPT Plus allowance use.
+
 ## 1.0.0 — 2026-07-10
 
 - Added the installable Lantern Agent Skill.

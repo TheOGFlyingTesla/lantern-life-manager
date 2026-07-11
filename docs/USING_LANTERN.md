@@ -54,7 +54,7 @@ Try:
 
 ## Model routing
 
-Lantern uses Luna high for most work, Luna extra high when a bounded task needs more depth, selective Terra where its current strengths matter, and Sol medium for consequential cross-domain synthesis or final review. Ask:
+For cost-sensitive personal-plan use, Lantern uses Luna high for clear and checkable routine work, Luna extra high when a bounded task needs more depth, optional Terra when a trial supports it, and Sol medium as the normal ceiling for ambiguous, consequential, sensitive, or final-review work. Higher Sol efforts require an exceptional, stated reason; Ultra is only for cleanly divisible parallel work. Ask:
 
 > Why are you recommending this model and effort for this task?
 

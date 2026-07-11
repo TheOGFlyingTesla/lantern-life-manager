@@ -21,6 +21,28 @@ class DocumentationTests(unittest.TestCase):
         ):
             self.assertIn(required, text)
 
+    def test_codex_assisted_setup_avoids_system_developer_tools(self):
+        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for required in (
+            "--method download",
+            "bundled git",
+            "bundled python",
+            "apple developer tools",
+            "xcode",
+            "windows",
+            "codex itself may require",
+            "large download",
+            "before installing",
+            "project kit",
+            "separate browser session",
+            "open the actual page",
+            "framework-ready checklist",
+        ):
+            self.assertIn(required, guide)
+
     def test_relative_markdown_links_exist(self):
         paths = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))]
         for path in paths:
@@ -42,6 +64,14 @@ class DocumentationTests(unittest.TestCase):
         self.assertIn("skills menu", text)
         self.assertIn("project kit", text)
         self.assertIn("one project per", text)
+        for required in (
+            "textedit",
+            "extract all",
+            "notepad",
+            "project settings",
+            "verify the project",
+        ):
+            self.assertIn(required, text)
 
 
 if __name__ == "__main__":
