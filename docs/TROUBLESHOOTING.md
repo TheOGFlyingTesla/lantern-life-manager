@@ -49,6 +49,10 @@ Lantern itself does not need them. The manual Skill-upload and Project Kit paths
 
 If Codex verifies that Xcode Command Line Tools or Apple developer tools are genuinely required, the user may choose to install them. That is a Codex platform decision, not a Lantern requirement. On Windows, Apple tooling is irrelevant; use the available Codex runtime or Project Kit.
 
+## Setup asks me to install GitHub or create a GitHub account
+
+Stop that path. Lantern's public ZIP files use anonymous download. Do not install GitHub Desktop, do not install the GitHub CLI, do not install Git, and do not create or sign in to a GitHub account for Lantern setup. Open the [newest release](https://github.com/TheOGFlyingTesla/lantern-life-manager/releases/latest) in a browser and download the Skill ZIP or Project Kit ZIP directly.
+
 ## Lantern says a ChatGPT browser tab is open, but I cannot see it
 
 The signed-in Work app and a controlled browser session can be different. Lantern must open the actual page and verify it before asking you to sign in. It must not claim a tab is open when it is not visible.

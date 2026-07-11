@@ -6,19 +6,31 @@ Use this path when ChatGPT Work cannot create or configure the complete multi-Pr
 
 You should not need a terminal or developer knowledge. Tell Codex:
 
-> Install Lantern from the public `TheOGFlyingTesla/lantern-life-manager` repository, then set up the complete framework in ChatGPT Work. Prefer direct download and Codex's bundled runtimes. Do not invoke system developer tools silently. If this Codex installation requires an operating-system prerequisite, explain it and the manual Project Kit alternative before installing anything. Establish the entire framework before domain drilldown and show me the framework-ready checklist.
+> Set up Lantern using the newest public release at `https://github.com/TheOGFlyingTesla/lantern-life-manager/releases/latest`, then build the complete framework in ChatGPT Work. Use an anonymous download. Do not install GitHub Desktop, do not install the GitHub CLI, do not install Git, and do not ask me to create or sign in to a GitHub account. Prefer Codex's bundled runtimes if a helper is needed. Do not invoke system developer tools silently. If this Codex installation requires an operating-system prerequisite, explain it and the manual Project Kit alternative before installing anything. Establish the entire framework before domain drilldown and show me the framework-ready checklist.
 
 ## How Codex should install the Skill
 
-Codex should use its installed Skill installer and choose direct GitHub archive download with `--method download`. That path does not need Git.
+The release files are public. Installation requires no GitHub account and no GitHub application. Do not install GitHub Desktop, do not install the GitHub CLI, and do not ask the user to create a GitHub account or sign in to GitHub.
+
+Codex should use its installed Skill installer and choose anonymous direct archive download with `--method download`. That path does not need Git. If it needs to discover the current asset name, read `https://github.com/TheOGFlyingTesla/lantern-life-manager/releases/latest` anonymously and select either the Skill ZIP or Project Kit ZIP.
+
+If the installer cannot perform the anonymous download, use a normal **browser download** from the latest-release page or give the user that single link. Do not respond by installing Git, GitHub Desktop, or the GitHub CLI. Do not clone the repository for an end-user installation.
 
 Before running any helper, Codex should load its workspace dependencies and use the returned **bundled Python** executable. It must not assume that `python3` is installed on macOS or Windows.
 
-If direct download is unavailable and a repository operation is genuinely necessary, Codex should use the exact **bundled Git** executable returned by its workspace dependency loader before trying macOS system Git.
+Repository operations are not part of normal end-user setup. Only if the user explicitly asks to modify Lantern's source should Codex use the exact **bundled Git** executable returned by its workspace dependency loader before trying macOS system Git.
 
 **Codex itself may require** an operating-system prerequisite in some environments. If a verified Codex operation still asks for Xcode Command Line Tools or Apple developer tools, stop before installing. Explain that this may be a **large download** and consume substantial disk space, and let the user decide between installing the Codex prerequisite and using the no-code Project Kit. Do not describe it as a Lantern dependency. On Windows, use the Codex-provided runtime or the Project Kit; Apple developer tools do not apply.
 
-After installation, Codex may need a new turn or a fresh thread before the newly installed Skill appears. It should verify that Lantern is available before claiming installation succeeded.
+## Continue directly into Lantern
+
+Installation is not the end of setup. After installing, Codex must verify that the Skill is discoverable and then **invoke Lantern automatically** in the current task with `$lantern-life-manager`. Do not make a novice guess that another command is required.
+
+If newly installed Skills require a **fresh task**, create that task and start Lantern there when the interface supports it. If Codex cannot create the task, give the user this single, prominent **exact prompt** to paste into a fresh task:
+
+> Use `$lantern-life-manager` to set up Lantern completely. Begin the guided interview, prepare the domain-neutral framework immediately in a background worker when available, and finish or clearly account for every item in the framework-ready checklist.
+
+Do not claim setup is underway merely because the ZIP was downloaded or the Skill was installed. Setup is underway only after Lantern has actually been invoked. If automatic invocation fails, state that clearly and show the exact prompt above—do not bury it among optional instructions.
 
 ## How Codex should work with ChatGPT Work
 
@@ -49,4 +61,4 @@ Each item must be marked complete, needs user action, or blocked. Optional apps,
 
 ## Platform notes
 
-The decision order is the same on macOS and Windows: direct download first, bundled runtimes second, then disclose any verified Codex platform prerequisite before installing it. The manual Project Kit remains the no-developer-tool fallback. Git and Python are maintainer tools for the Lantern repository, not requirements of Lantern itself.
+The decision order is the same on macOS and Windows: anonymous download first, browser download second, bundled runtimes only for a required helper, then disclose any verified Codex platform prerequisite before installing it. The manual Project Kit remains the no-developer-tool fallback. GitHub accounts, GitHub applications, Git, and Python are not requirements of Lantern itself.
