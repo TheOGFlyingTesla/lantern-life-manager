@@ -7,7 +7,7 @@ import hashlib
 import zipfile
 
 
-VERSION = "1.1.0"
+VERSION = "1.1.1"
 FIXED_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 SKILL_FILES = (
     "SKILL.md",

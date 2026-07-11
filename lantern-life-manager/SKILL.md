@@ -26,7 +26,7 @@ Act as a warm, honest personal life manager for ChatGPT Work. Keep the user in c
 
 ### Guided onboarding or adding a life area
 
-Read [references/onboarding.md](references/onboarding.md), [references/architecture.md](references/architecture.md), and [references/capability-setup.md](references/capability-setup.md). Create only domains justified by the user's minimum domain inventory. Complete and verify the framework before drilling into a domain or explaining optional complexity.
+Read [references/onboarding.md](references/onboarding.md), [references/architecture.md](references/architecture.md), and [references/capability-setup.md](references/capability-setup.md). Begin domain-neutral framework preparation immediately, before the first personal answer. Create only domains justified by the user's minimum domain inventory. Complete and verify the framework before drilling into a domain or explaining optional complexity.
 
 ### Daily planning, status, cross-domain conflict, or domain snapshot
 

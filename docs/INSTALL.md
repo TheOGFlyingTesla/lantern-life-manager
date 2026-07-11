@@ -4,6 +4,8 @@
 
 You do not need GitHub knowledge. **Lantern itself does not require Git** and **Lantern itself does not require Python**; manual Skill upload and the Project Kit require no developer software on macOS or Windows.
 
+The downloads are public: you do not need a GitHub account, GitHub Desktop, the GitHub CLI, or a repository clone. Open the newest release page in an ordinary browser and download the ZIP you need.
+
 ## First: check for a Skills menu
 
 1. Open ChatGPT.
@@ -14,7 +16,7 @@ If you see it, use the Skill path. If you do not, use the Project Kit path. Both
 
 ## Path A: install the Lantern Skill
 
-1. Download `lantern-life-manager-v1.1.0.zip` from the newest release.
+1. Download `lantern-life-manager-v1.1.1.zip` from the newest release.
 2. In ChatGPT, open **Profile → Skills → New skill → Upload from your computer**.
 3. Choose the ZIP without unzipping it.
 4. Review ChatGPT's scan result. Stop if ChatGPT blocks the package or shows an unexpected capability.
@@ -27,7 +29,7 @@ The Skill is reusable across the separate Projects Lantern creates. After the mi
 
 Use this path when the Skills menu is absent.
 
-1. Download `lantern-project-kit-v1.1.0.zip` from the newest release.
+1. Download `lantern-project-kit-v1.1.1.zip` from the newest release.
 2. Unzip it by opening the downloaded file.
 3. Open `START_HERE.md`.
 4. Create a new ChatGPT Project named **Lantern — Life Manager**.

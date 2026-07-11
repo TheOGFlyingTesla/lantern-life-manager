@@ -2,6 +2,12 @@
 
 All notable changes to Lantern are documented here.
 
+## 1.1.1 — 2026-07-11
+
+- Prevented first-run setup from requesting GitHub Desktop, GitHub CLI, Git installation, repository cloning, or a GitHub account; public release assets now use anonymous or ordinary browser download.
+- Added a mandatory post-install handoff: invoke Lantern automatically, create a fresh task when required and supported, or show one exact prompt when the user must do it.
+- Started domain-neutral framework preparation before the first onboarding answer, with background and sequential paths.
+
 ## 1.1.0 — 2026-07-11
 
 - Added framework-first onboarding: complete and verify the Life Manager/domain architecture before detailed domain work, without repeated “continue” prompts for mechanical setup.

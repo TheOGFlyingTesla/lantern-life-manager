@@ -43,6 +43,58 @@ class DocumentationTests(unittest.TestCase):
         ):
             self.assertIn(required, guide)
 
+    def test_codex_setup_requires_no_github_install_or_account(self):
+        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        capability = (
+            ROOT
+            / "lantern-life-manager"
+            / "references"
+            / "capability-setup.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        for text in (guide, capability):
+            for required in (
+                "do not install github desktop",
+                "do not install the github cli",
+                "do not ask the user to create a github account",
+                "anonymous download",
+                "no github account",
+            ):
+                self.assertIn(required, text)
+
+        self.assertIn("releases/latest", guide)
+        self.assertIn("browser download", guide)
+
+    def test_codex_install_hands_off_directly_into_lantern(self):
+        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        onboarding = (
+            ROOT
+            / "lantern-life-manager"
+            / "references"
+            / "onboarding.md"
+        ).read_text(encoding="utf-8").casefold()
+
+        for required in (
+            "invoke lantern automatically",
+            "fresh task",
+            "exact prompt",
+            "do not claim setup is underway",
+            "$lantern-life-manager",
+        ):
+            self.assertIn(required, guide)
+
+        for required in (
+            "before the first personal answer",
+            "domain-neutral",
+            "background setup task",
+            "sequential fallback",
+        ):
+            self.assertIn(required, onboarding)
+
     def test_relative_markdown_links_exist(self):
         paths = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))]
         for path in paths:

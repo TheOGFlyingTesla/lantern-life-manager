@@ -8,7 +8,9 @@ Pause only for a personal answer, a required sign-in or permission the user must
 
 After each section, create a compact append-only onboarding checkpoint from `assets/templates/onboarding-checkpoint.md`. Use schema `lantern-onboarding/v1`, an absolute timestamp, and a filename like `lantern-onboarding-YYYYMMDDTHHMMSSZ.md`. Save it to ChatGPT Library when available. If saving fails, present it as a short copyable handoff and say what failed. Never overwrite an older checkpoint automatically.
 
-Start with: “What would make Lantern genuinely useful for you over the next few weeks?” Then collect the **minimum domain inventory** needed to build the framework:
+Before the first personal answer, attempt one **background setup task** to prepare the domain-neutral portion of the **default framework**: Life Manager materials, generic coordinator and snapshot templates, an empty dashboard shell, onboarding checkpoint, recovery instructions, and verification checklist. Do not wait for domain answers to prepare these universal pieces. If background work is unavailable, use the sequential fallback and prepare them in the current task without interrupting the interview.
+
+Then ask: “What would make Lantern genuinely useful for you over the next few weeks?” Collect the **minimum domain inventory** needed to finish the framework:
 
 1. the user's time zone;
 2. the active commitments or life areas that currently need coordination; and
@@ -18,7 +20,7 @@ Do not drill into an assignment, application, job, internship, budget, routine, 
 
 ## Parallel first run
 
-When the current interface supports creating a separate task, prefer a **background setup task** alongside the main **guided interview**. Start it as soon as the minimum domain inventory is available. The main task keeps the user oriented and collects answers one at a time while the setup task prepares the complete **default framework**: Life Manager materials, templates, dashboard, checkpoint, recovery instructions, verification checklist, and the baseline domain coordinators justified by that inventory. Do not create speculative School, Career, Money, or other domain Projects merely because they are common. Feed later interview answers into customization and additional justified domains; do not make the user wait through mechanical narration.
+When the current interface supports creating a separate task, keep the **background setup task** running alongside the main **guided interview**. Once the minimum domain inventory is available, extend the domain-neutral framework with only the baseline domain coordinators justified by that inventory. Do not create speculative School, Career, Money, or other domain Projects merely because they are common. Feed later interview answers into customization and additional justified domains; do not make the user wait through mechanical narration.
 
 Give the setup task a self-contained packet and require a concrete completion report. It may create private, reversible Projects only when that capability is available and authorized. It must **never claim** a Project, file, browser state, or installation exists unless it is **verified**. If it cannot create Projects across the relevant interface, it prepares all artifacts and returns one **consolidated** manual action packet.
 

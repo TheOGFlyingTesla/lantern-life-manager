@@ -6,6 +6,8 @@ Lantern helps you move beyond one-off ChatGPT conversations and start using AI a
 
 Think of Lantern as a light in the dark when agentic AI sounds powerful but you have no idea where to begin. It helps you plan, research, prepare, organize, and follow through—without needing to code, understand GitHub, or learn agent architecture.
 
+Installing Lantern does not require a GitHub account or GitHub software. Its public release ZIPs can be downloaded anonymously in a normal browser.
+
 Lantern itself and its manual Project Kit do not require Git, Python, Xcode, Apple developer tools, or another developer toolchain on macOS or Windows. The optional Codex-assisted path may have Codex/macOS prerequisites, which should be disclosed before installation.
 
 It is free, open source, and designed for real people managing real lives.
