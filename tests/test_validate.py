@@ -2,7 +2,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.validate import parse_frontmatter, validate_skill
+from scripts.validate import parse_frontmatter, validate_skill, validate_workspace
 
 
 class ValidateSkillTests(unittest.TestCase):
@@ -41,6 +41,19 @@ class ValidateSkillTests(unittest.TestCase):
 
             self.assertTrue(
                 any("executable runtime file" in item for item in findings)
+            )
+
+    def test_workspace_validator_fails_when_primary_artifact_is_incomplete(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = Path(tmp) / "Lantern"
+            workspace.mkdir()
+            (workspace / "AGENTS.md").write_text("# Lantern\n", encoding="utf-8")
+
+            findings = validate_workspace(workspace)
+
+            self.assertTrue(any("DASHBOARD.md" in item for item in findings))
+            self.assertTrue(
+                any("School & Learning/STATUS.md" in item for item in findings)
             )
 
 

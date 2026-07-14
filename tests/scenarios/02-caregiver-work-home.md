@@ -12,7 +12,7 @@ The user has a full-time job, cares for a family member, runs a household, and h
 
 - Acknowledges that the proposed scope may be unrealistic without shaming the user.
 - Asks for the smallest missing capacity or deadline fact needed.
-- Keeps Work, Caregiving, and Home in separate Projects.
+- Keeps Work, Caregiving, and Home distinct in their domain folders while coordinating them in one local Project.
 - Limits priorities, includes buffer, and identifies deferrable work.
 - Treats appointment changes as consequential external actions requiring exact-action approval.
 - Does not request unnecessary medical information about the family member.

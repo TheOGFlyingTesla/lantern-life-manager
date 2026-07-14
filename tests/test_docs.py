@@ -21,32 +21,8 @@ class DocumentationTests(unittest.TestCase):
         ):
             self.assertIn(required, text)
 
-    def test_codex_assisted_setup_avoids_system_developer_tools(self):
-        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
-            encoding="utf-8"
-        ).casefold()
-
-        for required in (
-            "--method download",
-            "bundled git",
-            "bundled python",
-            "apple developer tools",
-            "xcode",
-            "windows",
-            "codex itself may require",
-            "large download",
-            "before installing",
-            "project kit",
-            "separate browser session",
-            "open the actual page",
-            "framework-ready checklist",
-        ):
-            self.assertIn(required, guide)
-
-    def test_codex_setup_requires_no_github_install_or_account(self):
-        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
-            encoding="utf-8"
-        ).casefold()
+    def test_install_requires_no_developer_tools_or_account(self):
+        guide = (ROOT / "docs" / "INSTALL.md").read_text(encoding="utf-8").casefold()
         capability = (
             ROOT
             / "lantern-life-manager"
@@ -59,18 +35,16 @@ class DocumentationTests(unittest.TestCase):
                 "do not install github desktop",
                 "do not install the github cli",
                 "do not ask the user to create a github account",
-                "anonymous download",
                 "no github account",
+                "no git",
+                "no python",
             ):
                 self.assertIn(required, text)
 
         self.assertIn("releases/latest", guide)
-        self.assertIn("browser download", guide)
 
-    def test_codex_install_hands_off_directly_into_lantern(self):
-        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
-            encoding="utf-8"
-        ).casefold()
+    def test_install_is_one_folder_one_project_one_prompt(self):
+        guide = (ROOT / "docs" / "INSTALL.md").read_text(encoding="utf-8").casefold()
         onboarding = (
             ROOT
             / "lantern-life-manager"
@@ -79,36 +53,37 @@ class DocumentationTests(unittest.TestCase):
         ).read_text(encoding="utf-8").casefold()
 
         for required in (
-            "invoke lantern automatically",
-            "fresh task",
-            "exact prompt",
-            "do not claim setup is underway",
-            "$lantern-life-manager",
+            "one folder",
+            "one local project",
+            "start lantern",
+            "do not install a skill",
+            "extract all",
+            "keep the entire lantern folder together",
         ):
             self.assertIn(required, guide)
 
         for required in (
-            "before the first personal answer",
-            "starter project map",
-            "background setup task",
-            "sequential fallback",
+            "first genuine",
+            "starter domain",
+            "do not start a task in every domain",
+            "on demand",
         ):
             self.assertIn(required, onboarding)
 
-    def test_browser_project_setup_has_a_human_handoff(self):
-        guide = (ROOT / "docs" / "CODEX_ASSISTED_SETUP.md").read_text(
-            encoding="utf-8"
-        ).casefold()
-
-        for required in (
-            "do you see the chatgpt login page in the browser",
-            "if not, tell me and i’ll fix it",
-            "please sign in there",
-            "verify that sign-in succeeded",
-            "may i take control of the cursor",
-            "create and verify",
+    def test_active_user_docs_are_local_first(self):
+        for relative in (
+            "README.md",
+            "docs/INSTALL.md",
+            "docs/USING_LANTERN.md",
+            "docs/TROUBLESHOOTING.md",
         ):
-            self.assertIn(required, guide)
+            text = (ROOT / relative).read_text(encoding="utf-8").casefold()
+            self.assertIn("local", text, relative)
+            self.assertNotIn("primary handoff", text, relative)
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8").casefold()
+        self.assertIn("desktop", readme)
+        self.assertIn("not supported on the web", readme)
 
     def test_relative_markdown_links_exist(self):
         paths = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))]
@@ -123,20 +98,19 @@ class DocumentationTests(unittest.TestCase):
                 resolved = (path.parent / relative).resolve()
                 self.assertTrue(resolved.exists(), f"{path}: broken link {target}")
 
-    def test_install_docs_explain_both_supported_paths(self):
+    def test_install_docs_are_nontechnical_and_desktop_only(self):
         text = (ROOT / "docs" / "INSTALL.md").read_text(
             encoding="utf-8"
         ).casefold()
 
-        self.assertIn("skills menu", text)
-        self.assertIn("project kit", text)
-        self.assertIn("one project per", text)
+        self.assertIn("chatgpt desktop app", text)
+        self.assertIn("lantern-desktop-v2.0.0.zip", text)
+        self.assertIn("not supported on the web", text)
         for required in (
-            "textedit",
             "extract all",
-            "notepad",
-            "project settings",
-            "verify the project",
+            "double-click",
+            "local project",
+            "start lantern",
         ):
             self.assertIn(required, text)
 

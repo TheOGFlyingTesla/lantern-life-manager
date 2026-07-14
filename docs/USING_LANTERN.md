@@ -2,66 +2,59 @@
 
 [Back to the Lantern overview](../README.md)
 
-## Where to talk
+## Start with the Life Manager
 
-Use **Lantern — Life Manager** for:
-
-- “What should I do next?”
-- cross-life scheduling and conflicts;
-- deciding which Project needs attention;
-- checking stale or blocked areas;
-- adding a new life area; and
-- weekly or near-term planning.
-
-Use a domain Project for focused work. For example:
-
-- School for assignments, exams, learning, and school administration;
-- Career for job searching, résumé work, applications, interviews, and networking;
-- a job or internship Project for that role's meetings, deliverables, and development;
-- Money for budgets, obligations, and financial planning; and
-- Home for errands, household work, appointments, and personal administration.
-
-## How updates move between Projects
-
-At a meaningful stopping point, a domain coordinator creates a small dated snapshot and saves it to ChatGPT Library. The snapshot contains the current state, next action, dates, blockers, confidence, and freshness.
-
-The Life Manager uses the newest valid snapshots. It does not assume every old chat is current. If Library retrieval is unavailable, Lantern asks you to choose the file from Library or gives you a short handoff to copy.
-
-## The four ways Lantern coordinates
-
-1. **Read:** Show the most recently confirmed state.
-2. **Queue:** Leave a self-contained request for the next visit to a domain Project.
-3. **Handle directly:** Complete small work from the Life Manager when it has enough context.
-4. **Background Work:** Propose a self-contained one-time job when your account supports it and the task is appropriate.
-
-A dormant chat cannot be reliably awakened from another Project. Queued work waits safely instead of disappearing.
-
-## A normal check-in
+The Life Manager is the main place to talk. Use it for priorities, cross-life conflicts, realistic planning, deciding where work belongs, adding domains, and recovering after plans change.
 
 Try:
 
-> Give me a realistic plan for the next three days. Check only the domains that matter, tell me what is stale, and give me one best next action.
+> Give me a realistic plan for the next three days. Tell me what is stale and give me one best next action.
 
-Lantern should limit priorities, include buffer, and recommend a Project.
+## Focused domain work
+
+The downloaded folder already contains Personal, Home, Career & Job Search, Work/Internships/Volunteering, School & Learning, Finances, Appointments & Admin, Health & Wellbeing, and Relationships & Community.
+
+You do not need to start all their tasks. Ask the Life Manager for focused help when needed:
+
+> Help me work on my résumé in the Career domain.
+
+Lantern can handle the work in the current task or create a focused task when that capability is available and you want it. The coordinator reads its domain `STATUS.md` and `INBOX.md`, then updates `STATUS.md` at a meaningful checkpoint.
+
+If Lantern cannot create the focused task automatically:
+
+1. Start a new task inside the same Lantern Project.
+2. Paste: **Work as my Career coordinator. Read `Domains/AGENTS.md` and `Domains/Career & Job Search/`, then help me with my résumé.**
+
+Replace Career and résumé with the domain and work you need. Do not create another Project.
+
+## How information moves
+
+All tasks use the same local Lantern folder:
+
+- `DASHBOARD.md` holds the big picture.
+- Each domain's `STATUS.md` holds its current state and next action.
+- Each domain's `INBOX.md` holds queued requests.
+
+The files are the handoff. Tasks do not need to wake or message one another.
+
+## Add a domain
+
+Say:
+
+> Add a Lantern domain for caregiving. Set up its starter files without inventing information about me.
+
+Lantern creates the new folder inside `Domains/`, copies the templates, and adds it to the dashboard. No new Project is required.
 
 ## When plans fall apart
 
-Tell Lantern what changed. It should revise the plan without scolding you or pretending the old plan still works.
+Tell Lantern what actually happened:
 
-Try:
+> I did not finish yesterday's plan. Help me restart from where I really am.
 
-> I did not get any of yesterday's plan done. Help me restart from where I actually am.
+Lantern should revise the plan without scolding you or pretending the old plan still works.
 
-## Model routing
+## Apps and scheduled work
 
-For cost-sensitive personal-plan use, Lantern uses Luna high for clear and checkable routine work, Luna extra high when a bounded task needs more depth, optional Terra when a trial supports it, and Sol medium as the normal ceiling for ambiguous, consequential, sensitive, or final-review work. Higher Sol efforts require an exceptional, stated reason; Ultra is only for cleanly divisible parallel work. Ask:
+Connect email, calendar, storage, Slack, Teams, or Computer Use only when it solves a real need. Ask what a connection can read or change before enabling it.
 
-> Why are you recommending this model and effort for this task?
-
-Lantern should explain the tradeoff without claiming universal equivalence or inventing plan limits.
-
-## Apps and plugins
-
-Ask Lantern for a capability check. It should distinguish built-in tools from apps and installable Skills, then recommend only what matches your actual email, calendar, storage, school, or work systems.
-
-Google Drive and other external storage providers are optional backup or automation bridges. They are not required as Lantern's primary version 1 Hub.
+Scheduled work is optional. Lantern should not create one scheduled task per domain.

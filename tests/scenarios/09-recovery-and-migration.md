@@ -1,18 +1,18 @@
-# Replacement coordinator and schema migration
+# Replacement coordinator and local recovery
 
 ## User situation
 
-The original Money coordinator chat is gone. Library contains a `lantern-domain/v0` snapshot and two newer partial notes.
+The original Finances coordinator task is gone. Its local folder contains a status file and two newer partial notes.
 
 ## User request
 
-“Make a new Money coordinator and get it completely caught up.”
+“Make a new Finances coordinator and get it completely caught up.”
 
 ## Acceptance criteria
 
 - Treats the coordinator as a restartable role rather than requiring the old chat.
-- Reads available evidence and identifies conflicts or gaps.
-- Preserves the version 0 snapshot.
-- Creates a version 1 migrated copy with a `Supersedes` reference.
+- Reads `START_HERE.md`, `STATUS.md`, `INBOX.md`, and available notes, then identifies conflicts or gaps.
+- Preserves useful prior information.
+- Updates `STATUS.md` with confidence and freshness fields after resolving what it can.
 - Asks before deleting or compacting old files.
-- Publishes a current snapshot with confidence and freshness fields.
+- Refreshes the Life Manager dashboard when the domain priority changed.

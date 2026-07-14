@@ -2,88 +2,53 @@
 
 [Back to the Lantern overview](../README.md)
 
-## I do not have a Skills menu
+## I opened the folder and see an empty task
 
-Use the Project Kit. Skills availability varies by plan, workspace, and rollout. The Project Kit implements the same manager and coordinator behavior through Project instructions.
+Type:
 
-## The Life Manager cannot see another Project
+> Start Lantern.
 
-That is expected with some memory settings and plans. Lantern should use the newest domain snapshot from ChatGPT Library.
+Lantern reads `AGENTS.md` and begins the four-step onboarding. No other activation prompt is required.
 
-1. Open Library.
-2. Search for `lantern-` followed by the domain ID.
-3. Choose the newest timestamped snapshot.
-4. Add it to the Life Manager chat.
+## I do not see the Lantern Project
 
-If that is inconvenient, ask the domain coordinator for a **copyable manager handoff** and paste it into the Life Manager.
+Open **Projects** in the ChatGPT desktop app and add the complete local `Lantern` folder. The Open Folder shortcut is Cmd/Ctrl+O when available. Do not add the ZIP itself and do not select only one domain folder.
 
-## A coordinator did not update the manager
+## My Projects are hidden in the sidebar
 
-A separate Project cannot wake or directly message the Life Manager. Open the domain Project and say:
+Open the Projects view. Pin the Lantern Project if your app offers that option. Pinning changes visibility only; it does not change what Lantern can read.
 
-> Publish a fresh Lantern snapshot and tell me whether Library saving succeeded.
+## Lantern asks me to create nine Projects or initialize nine tasks
 
-Then return to the Life Manager.
+Stop that path. Lantern 2 uses one local Project and one required Life Manager task. Domain tasks are optional and start on demand.
 
-## Information conflicts or looks stale
+## Lantern asks me to install GitHub, Git, Python, Xcode, or developer tools
 
-Say:
+Stop. Lantern 2 needs none of them. Download and extract `lantern-desktop-v2.0.0.zip`, then add the folder directly in the desktop app.
 
-> Help me recover Lantern. Separate confirmed, stale, uncertain, and conflicting information before making a plan.
+## Lantern created cloud Projects or opened the web version
 
-Lantern should preserve old snapshots, compare dates and evidence, ask only consequential questions, and publish a new recovery snapshot.
+Stop. Lantern 2 is desktop-only and is not supported on the web. Preserve any useful information, return to the downloaded local folder, and add that folder as one local Project.
 
-## Background Work did not run
+## The Life Manager cannot see domain information
 
-Scheduled and background capabilities vary. Tasks can pause, have plan limits, and may not access files uploaded directly to Projects. Lantern should keep the work request queued and show the smallest manual alternative.
+Verify that the domain folder remains inside `Lantern/Domains/` and contains `STATUS.md` and `INBOX.md`. Then ask:
 
-## An app is unavailable
+> Rebuild the dashboard from the domain status files and tell me which files are missing.
 
-Continue with ChatGPT Library snapshots. External storage and communication apps are optional. If the missing app was needed for an external action, Lantern must say the action did not happen.
+## A focused task did not update the manager
 
-## Setup asks me to install Git, Python, Xcode, or Apple developer tools
+Ask the task to update its domain `STATUS.md`. Then return to the Life Manager and ask it to refresh `DASHBOARD.md`. The files are the handoff; the tasks do not directly message one another.
 
-Lantern itself does not need them. The manual Skill-upload and Project Kit paths work without a developer toolchain. Codex-assisted setup can have separate Codex or macOS prerequisites. Say:
+## Setup stopped halfway
 
-> Stop before installing. Try direct download and Codex's bundled runtimes first. If Codex itself still requires this platform tool, explain its download and disk impact and offer the Project Kit alternative.
+Return to the same Life Manager task and say:
 
-If Codex verifies that Xcode Command Line Tools or Apple developer tools are genuinely required, the user may choose to install them. That is a Codex platform decision, not a Lantern requirement. On Windows, Apple tooling is irrelevant; use the available Codex runtime or Project Kit.
+> Resume Lantern setup from the verified files. Do not answer any questions for me.
 
-## Setup asks me to install GitHub or create a GitHub account
+## Start over without losing information
 
-Stop that path. Lantern's public ZIP files use anonymous download. Do not install GitHub Desktop, do not install the GitHub CLI, do not install Git, and do not create or sign in to a GitHub account for Lantern setup. Open the [newest release](https://github.com/TheOGFlyingTesla/lantern-life-manager/releases/latest) in a browser and download the Skill ZIP or Project Kit ZIP directly.
-
-## Lantern says a ChatGPT browser tab is open, but I cannot see it
-
-The signed-in Work app and a controlled browser session can be different. Lantern must open the actual page and verify it before asking you to sign in. It must not claim a tab is open when it is not visible.
-
-Ask Lantern to stay in the Work app for app-native setup. If a browser is truly required, say:
-
-> Open the actual page in the browser session, verify what is visible, and then explain whether that separate browser session needs sign-in.
-
-If Computer Use cannot control the signed-in desktop app, it should use the verified browser page instead. Complete only the browser sign-in yourself; after that, Lantern should create and configure the Projects rather than handing the clicks back to you.
-
-If no page opens, use the app-native or manual fallback instead of repeating a sign-in instruction.
-
-## Setup stopped with only part of the framework
-
-Say:
-
-> Finish Lantern's framework-first setup before domain drilldown. Prepare every remaining artifact, then show the framework-ready checklist and one consolidated list of actions I must perform.
-
-Lantern should preserve what already exists, complete or mark every required framework item, and only then begin detailed work in a domain.
-
-## The recommended model is unavailable
-
-Use the closest available route and narrow the task. For important work, add a separate review pass. Do not assume a different model is equivalent without evidence.
-
-## There are too many Projects
-
-Ask Lantern to review the structure. Archive completed or inactive domains and keep only substantial ongoing areas as Projects. Do not merge active domains merely to hide complexity.
-
-## Start over without losing everything
-
-Do not delete Projects first. Ask each active domain for a current snapshot, export the dashboard and open requests, then create replacement chats or Projects. Delete old content only after verifying the replacement.
+Do not delete the Lantern folder first. Copy it as a backup, then ask Lantern to rebuild the dashboard from existing domain files. Delete anything only after verifying the replacement.
 
 ## Report a problem
 

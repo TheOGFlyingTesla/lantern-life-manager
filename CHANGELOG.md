@@ -2,6 +2,18 @@
 
 All notable changes to Lantern are documented here.
 
+## 2.0.0 — 2026-07-13
+
+- Replaced the multi-Project installer with one ready-made local `Lantern` folder and one desktop Project.
+- Added nine pre-built domain folders with durable `STATUS.md`, `INBOX.md`, and welcome files.
+- Made `DASHBOARD.md` plus domain files the coordination layer; cloud services are optional backup only.
+- Reduced activation to one genuine message: `Start Lantern.`
+- Made focused coordinator tasks optional and on demand instead of requiring nine empty tasks.
+- Allowed Lantern to add new domain folders safely inside its own workspace.
+- Declared the web version unsupported rather than shipping a weaker cloud mode.
+- Prohibited Lantern from answering onboarding questions or creating both sides of a conversation.
+- Kept Git, GitHub, and Git repositories out of ordinary end-user setup.
+
 ## 1.2.0 — 2026-07-11
 
 - Added a fixed four-step visual onboarding flow with a visible question count and a maximum of three initial questions.

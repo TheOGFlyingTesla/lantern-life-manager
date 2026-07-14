@@ -1,63 +1,35 @@
-# Capability and App Setup
+# Desktop Capabilities and Optional Connections
 
-## Audit before recommending
+## Required surface
 
-Check what the user's plan, region, device, and workspace actually expose. Do not claim a capability exists because it is popular or newly announced. If availability cannot be verified, give the user the shortest place to check.
+Lantern 2 supports the ChatGPT desktop app on macOS and Windows using one local Project connected to the downloaded starter folder. The web version is not supported because it does not provide the same durable local filesystem behavior.
 
-## Separate Lantern requirements from Codex requirements
+**Lantern itself does not require Git. Lantern itself does not require Python.** The starter folder requires **no GitHub account, no Python installation**, no terminal, Xcode, or Apple developer tools. Do not install GitHub Desktop. Do not install the GitHub CLI. Do not install any developer tool for Lantern.
 
-**Lantern itself does not require Git** and **Lantern itself does not require Python**. The manual Skill-upload and Project Kit paths require no Xcode, Apple developer tools, Homebrew, package manager, or browser extension on macOS or Windows. Git and Python in this repository are maintainer tooling.
+Public releases use an anonymous download from `releases/latest`. Do not ask the user to create a GitHub account or clone the repository.
 
-Public Lantern release files use an anonymous download. Installation requires no GitHub account. Do not install GitHub Desktop, do not install the GitHub CLI, and do not ask the user to create a GitHub account or sign in. If direct download fails, offer a normal browser download from the latest-release page or the manual Project Kit. Never turn an end-user installation into a repository clone.
+## Register the folder
 
-**Codex-assisted setup may require** prerequisites belonging to Codex or macOS rather than Lantern. First attempt anonymous or browser download. Use the bundled Python runtime only if the installed Skill helper requires it; bundled Git is reserved for an explicitly requested source operation, not ordinary installation. If that Codex installation still presents a verified requirement for Xcode Command Line Tools or Apple developer tools, explain before installation that it can be a large download and consume substantial disk space. Let the user choose between installing the Codex prerequisite and using Lantern's no-code Project Kit path. Never present it as a hidden Lantern dependency. On Windows, use the Codex-provided runtime or manual Project Kit; Apple tooling does not apply.
+The user extracts `lantern-desktop-v2.0.0.zip`, moves the complete `Lantern` folder to a dependable writable location, and adds that one folder as a local Project in the desktop app. On macOS or Windows, the Open Folder shortcut is Cmd/Ctrl+O when available.
 
-## Built-in capabilities
+Do not create separate Projects for every starter domain. Do not use Computer Use for ordinary installation. If the folder picker is unavailable, explain the smallest manual app step and do not fall back to a cloud ChatGPT Project.
 
-Use when available without describing them as plugins:
+## Optional Skill and Codex tooling
 
-- web search or deep research for current information;
-- Computer Use for approved browser or desktop interaction;
-- ChatGPT Library for saved snapshot reuse;
-- Scheduled Tasks for limited reminders or monitoring;
-- Study Mode for learning-centered school support; and
-- document, spreadsheet, presentation, résumé, and job-search tools.
+Advanced users may install the separate Lantern Skill, but it is not required for the starter workspace. The Skill augments an existing downloaded Lantern desktop workspace; it does not contain or replace that folder. Codex itself may have platform prerequisites for unrelated source-code operations; those are not Lantern requirements. Bundled Git or bundled Python are relevant only to maintainers or explicit source operations.
 
-Computer Use is a capability. Explain what will be controlled and obtain exact-action approval before consequential clicks, uploads, messages, or submissions.
+## Optional apps and plugins
 
-## Work app, browser, and sign-in
+Recommend connections only after onboarding and only when they solve a stated need:
 
-Treat the signed-in ChatGPT Work app and any controlled browser session as separate surfaces. Prefer the current Work app for Skills, Projects, Library, and ordinary Lantern setup. Do not open a browser merely to reproduce an app-native action.
+- Gmail or Outlook Email;
+- Google Calendar or Outlook Calendar;
+- storage for optional backup;
+- Slack or Teams for a role that actually uses it; or
+- Computer Use for a specific GUI task that lacks a structured integration.
 
-When browser control is genuinely required, invoke the available bundled browser capability instead of guessing an example installation path. Open the actual page first and verify the expected page is visible before mentioning sign-in. Do not claim a tab is open when it has not been opened and verified.
-
-A browser session may not share the Work app's authentication. If the verified page is signed out, explain that it is a separate browser session and either open the correct sign-in page or offer an app-native/manual fallback. Never tell the user to use an “open ChatGPT tab” unless that tab has actually been opened and verified.
-
-## Connected apps
-
-Recommend only apps that solve a stated need:
-
-- Gmail **or** Outlook Email—not both unless the user uses both;
-- Google Calendar **or** Outlook Calendar;
-- Google Drive, OneDrive, SharePoint, Box, or Notion for optional backup or automation;
-- Slack or Teams only for an active role that uses it.
-
-For each recommendation, state:
-
-1. what it enables;
-2. what information it may access;
-3. whether it can write or take actions;
-4. whether the user can skip it; and
-5. where to disconnect it later.
-
-Prefer least privilege. Never recommend installing every popular app.
-
-## Skills and plugins
-
-Where a current Skills or plugin catalog is available, search it at the time of setup. Recommend a Skill only when it materially improves an established workflow and is available to the user's account. Explain that Skills and plugins do not grant access the user lacks.
-
-Do not hard-code catalog entries that may disappear. If Skills are unavailable, use Lantern's Project Kit and built-in capabilities.
+For each recommendation, explain what it can read or change, whether it can take actions, how to disconnect it, and how to skip it. Never recommend installing everything.
 
 ## Scheduled work
 
-Keep scheduled work optional. Plus task limits are scarce, tasks may pause, and Project-uploaded files may be unavailable to them. Prefer one Dispatcher over one task per domain, and only when a task-visible connected source exists.
+Scheduled work is optional. Never allocate one scheduled task per domain. Prefer ordinary local files and on-demand focused tasks. If a scheduled task cannot read the local workspace, keep the request in the domain `INBOX.md` and say that it remains queued.

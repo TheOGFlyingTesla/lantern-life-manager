@@ -24,7 +24,7 @@ class ContentContractTests(unittest.TestCase):
 
         for required in (
             "guided onboarding",
-            "domain snapshot",
+            "domain status",
             "work request",
             "recover",
             "capability",
@@ -40,22 +40,17 @@ class ContentContractTests(unittest.TestCase):
             text,
         )
 
-    def test_domain_snapshot_is_versioned_and_freshness_aware(self):
+    def test_domain_status_is_freshness_aware(self):
         text = (
-            SKILL / "assets" / "templates" / "domain-snapshot.md"
+            SKILL / "assets" / "templates" / "STATUS.md"
         ).read_text(encoding="utf-8")
 
-        for required in (
-            "lantern-domain/v1",
-            "Last verified",
-            "Review after",
-            "Supersedes",
-        ):
+        for required in ("Last verified", "Review after", "Confidence"):
             self.assertIn(required, text)
 
-    def test_domain_snapshot_matches_approved_compact_schema(self):
+    def test_domain_status_matches_approved_compact_schema(self):
         text = (
-            SKILL / "assets" / "templates" / "domain-snapshot.md"
+            SKILL / "assets" / "templates" / "STATUS.md"
         ).read_text(encoding="utf-8")
         fields = [
             line
@@ -66,26 +61,23 @@ class ContentContractTests(unittest.TestCase):
         self.assertEqual(
             fields,
             [
-                "- Schema: lantern-domain/v1",
-                "- Domain ID:",
-                "- Status: active | waiting | blocked | completed | archived",
-                "- Outcome:",
-                "- Current state:",
-                "- Done since last snapshot:",
-                "- Blockers or decisions needed:",
-                "- Next action:",
-                "- Important dates:",
-                "- Pending requests:",
-                "- Confidence: high | medium | low",
-                "- Last verified:",
-                "- Review after:",
-                "- Supersedes:",
+                "- State: not reviewed",
+                "- Outcome: unknown",
+                "- Current situation: unknown",
+                "- Completed: none confirmed",
+                "- Important dates: unknown",
+                "- Blockers or decisions: unknown",
+                "- Next action: complete first domain check-in",
+                "- Confidence: low",
+                "- Last verified: never",
+                "- Review after: first use",
+                "- No personal information has been collected yet.",
             ],
         )
 
     def test_dashboard_example_matches_header_width(self):
         lines = (
-            SKILL / "assets" / "templates" / "dashboard.md"
+            SKILL / "assets" / "templates" / "DASHBOARD.md"
         ).read_text(encoding="utf-8").splitlines()
         table = [line for line in lines if line.startswith("|")]
 
@@ -93,18 +85,75 @@ class ContentContractTests(unittest.TestCase):
         width = table[0].count("|")
         self.assertTrue(all(line.count("|") == width for line in table))
 
-    def test_architecture_uses_separate_projects_and_library_snapshots(self):
+    def test_architecture_is_one_local_project_with_folder_scoped_domains(self):
         text = (SKILL / "references" / "architecture.md").read_text(
             encoding="utf-8"
         ).casefold()
 
         for required in (
-            "separate project",
-            "chatgpt library",
-            "append-only",
-            "cannot wake",
+            "local-first",
+            "one local project",
+            "lantern root",
+            "domains/",
+            "status.md",
+            "inbox.md",
+            "on demand",
+            "do not create cloud chatgpt projects",
+            "no git repository",
+            "optional backup",
         ):
             self.assertIn(required, text)
+
+    def test_local_starter_tree_is_complete(self):
+        onboarding = (SKILL / "references" / "onboarding.md").read_text(
+            encoding="utf-8"
+        )
+        for required in (
+            "Lantern/",
+            "AGENTS.md",
+            "DASHBOARD.md",
+            "Domains/",
+            "Personal",
+            "Career & Job Search",
+            "Work, Internships & Volunteering",
+            "School & Learning",
+            "Appointments & Admin",
+            "Health & Wellbeing",
+            "Relationships & Community",
+        ):
+            self.assertIn(required, onboarding)
+
+    def test_local_projects_boot_from_agents_files_and_domains_start_lazily(self):
+        workspace = ROOT / "starter-workspace" / "Lantern"
+        manager = (workspace / "AGENTS.md").read_text(encoding="utf-8").casefold()
+        start = (workspace / "START_HERE.md").read_text(encoding="utf-8").casefold()
+        domain = (workspace / "Domains" / "AGENTS.md").read_text(encoding="utf-8").casefold()
+
+        self.assertIn("start lantern", start)
+        self.assertIn("first genuine task", manager)
+        self.assertIn("do not start a task in every domain", manager)
+        self.assertIn("on demand", manager)
+        self.assertIn("status.md", domain)
+        self.assertIn("inbox.md", domain)
+
+    def test_starter_workspace_contains_every_domain_and_durable_state(self):
+        domains = ROOT / "starter-workspace" / "Lantern" / "Domains"
+        for name in (
+            "Personal",
+            "Home",
+            "Career & Job Search",
+            "Work, Internships & Volunteering",
+            "School & Learning",
+            "Finances",
+            "Appointments & Admin",
+            "Health & Wellbeing",
+            "Relationships & Community",
+        ):
+            folder = domains / name
+            self.assertTrue(folder.is_dir(), name)
+            for filename in ("START_HERE.md", "STATUS.md", "INBOX.md"):
+                self.assertTrue((folder / filename).is_file(), f"{name}/{filename}")
+
 
     def test_safety_requires_exact_action_approval(self):
         text = (
@@ -137,10 +186,7 @@ class ContentContractTests(unittest.TestCase):
         ):
             self.assertIn(required, routing)
 
-        for path in (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md",
-            ROOT / "project-kit" / "DOMAIN_COORDINATOR_INSTRUCTIONS.md",
-        ):
+        for path in (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md",):
             text = path.read_text(encoding="utf-8").casefold()
             self.assertIn("sol medium", text)
             self.assertIn("normal ceiling", text)
@@ -151,38 +197,31 @@ class ContentContractTests(unittest.TestCase):
         onboarding = (SKILL / "references" / "onboarding.md").read_text(
             encoding="utf-8"
         ).casefold()
-        manager = (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
+        manager = (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md").read_text(encoding="utf-8").casefold()
 
         for text in (onboarding, manager):
             for required in (
                 "framework-first",
-                "minimum domain inventory",
-                "framework-ready checklist",
-                "do not wait for the user to say continue",
-                "before domain drilldown",
+                "four",
+                "no more than three",
+                "verify",
+                "never answer",
             ):
                 self.assertIn(required, text)
 
-    def test_onboarding_prefers_parallel_framework_setup_with_safe_fallback(self):
+    def test_onboarding_uses_premade_framework_without_background_installer(self):
         onboarding = (SKILL / "references" / "onboarding.md").read_text(
             encoding="utf-8"
         ).casefold()
-        manager = (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
+        manager = (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md").read_text(encoding="utf-8").casefold()
 
         for text in (onboarding, manager):
             for required in (
-                "background setup task",
-                "guided interview",
-                "sequential fallback",
-                "default framework",
+                "already",
+                "start lantern",
                 "never claim",
                 "verified",
-                "consolidated",
-                "starter project map",
+                "do not start a task in every domain",
             ):
                 self.assertIn(required, text)
 
@@ -190,43 +229,61 @@ class ContentContractTests(unittest.TestCase):
         onboarding = (SKILL / "references" / "onboarding.md").read_text(
             encoding="utf-8"
         ).casefold()
-        manager = (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
+        manager = (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md").read_text(encoding="utf-8").casefold()
 
         for text in (onboarding, manager):
             for required in (
                 "step 1 of 4",
-                "questions remaining",
                 "no more than three",
                 "skipped means skipped",
                 "life manager",
-                "personal",
-                "home",
-                "career & job search",
-                "work, internships & volunteering",
-                "school & learning",
-                "finances",
-                "appointments & admin",
-                "health & wellbeing",
-                "relationships & community",
-                "automatic project creation is unavailable",
-                "consolidated",
-                "computer use",
-                "codex project",
-                "chatgpt project",
-                "perform the creation actions",
-                "verify the sidebar",
-                "take control of the mouse cursor",
-                "you may see things moving on the screen",
-                "computer use is already available",
-                "enable the official computer use capability",
-                "do you see the chatgpt login page in the browser",
-                "if not, tell me and i’ll fix it",
-                "please sign in there",
-                "may i take control of the cursor",
+                "do not create cloud chatgpt projects",
+                "start lantern",
+                "status.md",
+                "dashboard.md",
             ):
                 self.assertIn(required, text)
+
+        self.assertIn("questions remaining", onboarding)
+        for domain in (
+            "personal",
+            "home",
+            "career & job search",
+            "work, internships & volunteering",
+            "school & learning",
+            "finances",
+            "appointments & admin",
+            "health & wellbeing",
+            "relationships & community",
+        ):
+            self.assertIn(domain, onboarding)
+
+    def test_onboarding_never_answers_for_the_user(self):
+        onboarding = (SKILL / "references" / "onboarding.md").read_text(
+            encoding="utf-8"
+        ).casefold()
+        manager = (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md").read_text(encoding="utf-8").casefold()
+
+        for text in (onboarding, manager):
+            for required in (
+                "never answer",
+                "unknown",
+                "never create both sides",
+                "first genuine",
+                "start_here.md",
+            ):
+                self.assertIn(required, text)
+
+    def test_start_here_is_brief_and_has_one_activation_prompt(self):
+        runtime = (ROOT / "starter-workspace" / "Lantern" / "START_HERE.md").read_text(encoding="utf-8")
+        self.assertLessEqual(len(runtime.split()), 220)
+        for required in (
+            "Welcome to Lantern",
+            "Start in three steps",
+            "Start Lantern.",
+            "only activation prompt",
+        ):
+            self.assertIn(required, runtime)
 
     def test_toolchain_guidance_separates_lantern_from_codex_prerequisites(self):
         capability = (SKILL / "references" / "capability-setup.md").read_text(
@@ -240,16 +297,16 @@ class ContentContractTests(unittest.TestCase):
             for required in (
                 "lantern itself does not require git",
                 "lantern itself does not require python",
-                "codex-assisted setup may require",
+                "codex",
                 "apple developer tools",
                 "xcode",
                 "windows",
-                "project kit",
+                "starter folder",
             ):
                 self.assertIn(required, text)
         self.assertIn("bundled git", capability)
 
-    def test_browser_auth_guidance_is_surface_aware(self):
+    def test_web_is_not_a_local_project_fallback(self):
         capability = (SKILL / "references" / "capability-setup.md").read_text(
             encoding="utf-8"
         ).casefold()
@@ -257,12 +314,10 @@ class ContentContractTests(unittest.TestCase):
             encoding="utf-8"
         ).casefold()
 
-        for text in (capability, troubleshooting):
-            self.assertIn("work app", text)
-            self.assertIn("browser session", text)
-            self.assertIn("open the actual page", text)
-            self.assertIn("verify", text)
-        self.assertIn("do not claim a tab is open", capability)
+        self.assertIn("web version is not supported", capability)
+        self.assertIn("do not fall back to a cloud chatgpt project", capability)
+        self.assertIn("not supported on the web", troubleshooting)
+        self.assertIn("one local project", troubleshooting)
 
     def test_runtime_archive_has_no_executable_files(self):
         forbidden = [
@@ -275,20 +330,6 @@ class ContentContractTests(unittest.TestCase):
 
         self.assertEqual(forbidden, [])
 
-    def test_project_kit_templates_match_runtime_templates(self):
-        for name in (
-            "domain-snapshot.md",
-            "work-request.md",
-            "dashboard.md",
-            "onboarding-checkpoint.md",
-        ):
-            runtime = (SKILL / "assets" / "templates" / name).read_bytes()
-            project = (
-                ROOT / "project-kit" / "templates" / name
-            ).read_bytes()
-
-            self.assertEqual(project, runtime)
-
     def test_onboarding_checkpoint_and_recovery_are_durable(self):
         onboarding = (SKILL / "references" / "onboarding.md").read_text(
             encoding="utf-8"
@@ -296,57 +337,26 @@ class ContentContractTests(unittest.TestCase):
         architecture = (SKILL / "references" / "architecture.md").read_text(
             encoding="utf-8"
         ).casefold()
-        manager = (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
+        manager = (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md").read_text(encoding="utf-8").casefold()
 
         for text in (onboarding, architecture, manager):
-            self.assertIn("onboarding checkpoint", text)
-            self.assertIn("lantern-onboarding/v1", text)
-        self.assertIn("newest valid onboarding checkpoint", architecture)
-
-    def test_project_kit_gives_domain_projects_their_templates(self):
-        start = (ROOT / "project-kit" / "START_HERE.md").read_text(
-            encoding="utf-8"
-        ).casefold()
-        install = (ROOT / "docs" / "INSTALL.md").read_text(
-            encoding="utf-8"
-        ).casefold()
-
-        for text in (start, install):
-            self.assertIn("each domain project", text)
-            self.assertIn("domain-snapshot.md", text)
-            self.assertIn("work-request.md", text)
-            self.assertIn("cannot see files uploaded", text)
+            self.assertIn("dashboard", text)
+            self.assertIn("status.md", text)
+        self.assertIn("recovery", architecture)
 
     def test_portable_export_is_a_runtime_workflow(self):
         skill = (SKILL / "SKILL.md").read_text(encoding="utf-8").casefold()
         architecture = (SKILL / "references" / "architecture.md").read_text(
             encoding="utf-8"
         ).casefold()
-        manager = (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
+        manager = (ROOT / "starter-workspace" / "Lantern" / "AGENTS.md").read_text(encoding="utf-8").casefold()
 
         self.assertIn("export", skill)
         self.assertIn("references/architecture.md", skill)
         for text in (architecture, manager):
             self.assertIn("portable export", text)
-            self.assertIn("latest dashboard", text)
-            self.assertIn("open work requests", text)
-
-    def test_project_kit_preserves_manager_and_domain_boundaries(self):
-        manager = (
-            ROOT / "project-kit" / "LIFE_MANAGER_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
-        domain = (
-            ROOT / "project-kit" / "DOMAIN_COORDINATOR_INSTRUCTIONS.md"
-        ).read_text(encoding="utf-8").casefold()
-
-        self.assertIn("life manager", manager)
-        self.assertIn("separate project", manager)
-        self.assertIn("domain coordinator", domain)
-        self.assertIn("publish", domain)
+            self.assertIn("dashboard", text)
+            self.assertIn("status", text)
 
 
 if __name__ == "__main__":

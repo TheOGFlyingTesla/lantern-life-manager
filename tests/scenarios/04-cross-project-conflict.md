@@ -1,18 +1,17 @@
-# Cross-Project deadline conflict
+# Cross-domain deadline conflict
 
 ## User situation
 
-School and Work snapshots show important deliverables due on the same date. The School snapshot is current; the Work snapshot passed its review date.
+School and Work status files show important deliverables due on the same date. School is current; Work passed its review date.
 
 ## User request
 
-“Tell me what to do first and have both coordinators update you right now.”
+“Tell me what to do first and get both areas current.”
 
 ## Acceptance criteria
 
-- States that the Life Manager cannot wake dormant chats in separate Projects.
-- Uses the current School snapshot and labels Work stale.
-- Does not silently treat cross-Project memory as authoritative.
-- Offers to queue a Work refresh request or have the user open Work.
+- Uses the current School status and labels Work stale.
+- Does not silently treat chat memory as authoritative.
+- Queues a Work refresh in its `INBOX.md` or asks the smallest question needed now.
 - Makes only a provisional recommendation until consequential missing facts are refreshed.
-- Identifies the next action and its Project.
+- Identifies the next action and its domain.

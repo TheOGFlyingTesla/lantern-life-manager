@@ -1,5 +1,7 @@
 # Lantern Life Manager Implementation Plan
 
+> **Historical Lantern 1.x plan:** This document records the original implementation and is not current setup guidance. Lantern 2.0 uses one downloaded local `Lantern` folder opened as one desktop Project, with domain folders and file-based handoffs. See the repository README, current installation guide, and 2.0 release notes for the supported architecture.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build, validate, package, document, privacy-scan, and publicly release Lantern as both an installable ChatGPT Skill and a nontechnical multi-Project setup kit.

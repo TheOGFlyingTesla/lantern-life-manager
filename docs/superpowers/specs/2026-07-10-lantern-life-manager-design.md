@@ -1,5 +1,7 @@
 # Lantern — A Personal Life Manager for ChatGPT Work
 
+> **Lantern 2.0 amendment (2026-07-13):** The active architecture is one downloaded local `Lantern` folder opened as one desktop Project. `DASHBOARD.md` and domain `STATUS.md`/`INBOX.md` files replace the old `_Hub`, Library, and always-multi-Project design. The Life Manager is the only required task; domain tasks start on demand. The web version is unsupported. Where this historical 1.x design conflicts with that rule, the 2.0 architecture and release documentation control.
+
 **Status:** Tightened design pending written-spec approval
 
 **Date:** 2026-07-10
