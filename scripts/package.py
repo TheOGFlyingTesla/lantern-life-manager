@@ -7,29 +7,57 @@ import hashlib
 import zipfile
 
 
-VERSION = "1.2.0"
+VERSION = "2.0.0"
 FIXED_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 SKILL_FILES = (
     "SKILL.md",
     "agents/openai.yaml",
-    "assets/templates/dashboard.md",
-    "assets/templates/domain-snapshot.md",
-    "assets/templates/onboarding-checkpoint.md",
-    "assets/templates/work-request.md",
+    "assets/templates/DASHBOARD.md",
+    "assets/templates/START_HERE.md",
+    "assets/templates/STATUS.md",
+    "assets/templates/INBOX.md",
     "references/architecture.md",
     "references/capability-setup.md",
     "references/model-routing.md",
     "references/onboarding.md",
     "references/safety-and-permissions.md",
 )
-PROJECT_KIT_FILES = (
-    "DOMAIN_COORDINATOR_INSTRUCTIONS.md",
-    "LIFE_MANAGER_INSTRUCTIONS.md",
+STARTER_WORKSPACE_FILES = (
+    "AGENTS.md",
+    "DASHBOARD.md",
+    "LANTERN_VERSION.md",
     "START_HERE.md",
-    "templates/dashboard.md",
-    "templates/domain-snapshot.md",
-    "templates/onboarding-checkpoint.md",
-    "templates/work-request.md",
+    "Domains/AGENTS.md",
+    "_Lantern/Templates/START_HERE.md",
+    "_Lantern/Templates/STATUS.md",
+    "_Lantern/Templates/INBOX.md",
+    "Domains/Personal/START_HERE.md",
+    "Domains/Personal/STATUS.md",
+    "Domains/Personal/INBOX.md",
+    "Domains/Home/START_HERE.md",
+    "Domains/Home/STATUS.md",
+    "Domains/Home/INBOX.md",
+    "Domains/Career & Job Search/START_HERE.md",
+    "Domains/Career & Job Search/STATUS.md",
+    "Domains/Career & Job Search/INBOX.md",
+    "Domains/Work, Internships & Volunteering/START_HERE.md",
+    "Domains/Work, Internships & Volunteering/STATUS.md",
+    "Domains/Work, Internships & Volunteering/INBOX.md",
+    "Domains/School & Learning/START_HERE.md",
+    "Domains/School & Learning/STATUS.md",
+    "Domains/School & Learning/INBOX.md",
+    "Domains/Finances/START_HERE.md",
+    "Domains/Finances/STATUS.md",
+    "Domains/Finances/INBOX.md",
+    "Domains/Appointments & Admin/START_HERE.md",
+    "Domains/Appointments & Admin/STATUS.md",
+    "Domains/Appointments & Admin/INBOX.md",
+    "Domains/Health & Wellbeing/START_HERE.md",
+    "Domains/Health & Wellbeing/STATUS.md",
+    "Domains/Health & Wellbeing/INBOX.md",
+    "Domains/Relationships & Community/START_HERE.md",
+    "Domains/Relationships & Community/STATUS.md",
+    "Domains/Relationships & Community/INBOX.md",
 )
 
 
@@ -80,33 +108,33 @@ def build_release(
     output_dir: Path,
     version: str = VERSION,
 ) -> tuple[Path, Path, Path]:
-    """Build Skill ZIP, Project Kit ZIP, and checksum manifest."""
+    """Build the desktop workspace, optional Skill, and checksums."""
     root = root.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    skill_zip = output_dir / f"lantern-life-manager-v{version}.zip"
-    project_zip = output_dir / f"lantern-project-kit-v{version}.zip"
+    desktop_zip = output_dir / f"lantern-desktop-v{version}.zip"
+    skill_zip = output_dir / f"lantern-skill-v{version}.zip"
     checksums = output_dir / "SHA256SUMS"
 
+    _write_zip(
+        root / "starter-workspace" / "Lantern",
+        "Lantern",
+        desktop_zip,
+        STARTER_WORKSPACE_FILES,
+    )
     _write_zip(
         root / "lantern-life-manager",
         "lantern-life-manager",
         skill_zip,
         SKILL_FILES,
     )
-    _write_zip(
-        root / "project-kit",
-        "lantern-project-kit",
-        project_zip,
-        PROJECT_KIT_FILES,
-    )
 
     lines = [
         f"{_sha256(path)}  {path.name}"
-        for path in sorted((skill_zip, project_zip), key=lambda item: item.name)
+        for path in sorted((desktop_zip, skill_zip), key=lambda item: item.name)
     ]
     checksums.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return skill_zip, project_zip, checksums
+    return desktop_zip, skill_zip, checksums
 
 
 def main() -> int:

@@ -11,25 +11,45 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PackageTests(unittest.TestCase):
-    def test_builds_clean_skill_and_project_archives(self):
+    def test_builds_clean_desktop_and_skill_artifacts(self):
         with tempfile.TemporaryDirectory() as tmp:
-            skill_zip, project_zip, sums = build_release(ROOT, Path(tmp))
+            desktop_zip, skill_zip, sums = build_release(ROOT, Path(tmp))
 
             self.assertTrue(sums.is_file())
+            with zipfile.ZipFile(desktop_zip) as archive:
+                names = archive.namelist()
+                self.assertIn("Lantern/AGENTS.md", names)
+                self.assertIn("Lantern/START_HERE.md", names)
+                self.assertIn("Lantern/Domains/AGENTS.md", names)
+                self.assertIn(
+                    "Lantern/Domains/School & Learning/STATUS.md",
+                    names,
+                )
             with zipfile.ZipFile(skill_zip) as archive:
                 names = archive.namelist()
                 self.assertIn("lantern-life-manager/SKILL.md", names)
+                self.assertIn(
+                    "lantern-life-manager/assets/templates/START_HERE.md",
+                    names,
+                )
+                self.assertIn(
+                    "lantern-life-manager/assets/templates/STATUS.md",
+                    names,
+                )
+                self.assertIn(
+                    "lantern-life-manager/assets/templates/INBOX.md",
+                    names,
+                )
+                self.assertNotIn(
+                    "lantern-life-manager/assets/templates/domain-snapshot.md",
+                    names,
+                )
                 self.assertFalse(any(name.endswith(".py") for name in names))
                 self.assertFalse(
                     any(
                         ".DS_Store" in name or "__pycache__" in name
                         for name in names
                     )
-                )
-            with zipfile.ZipFile(project_zip) as archive:
-                self.assertIn(
-                    "lantern-project-kit/LIFE_MANAGER_INSTRUCTIONS.md",
-                    archive.namelist(),
                 )
 
     def test_unreviewed_files_cannot_enter_archives(self):
@@ -40,12 +60,12 @@ class PackageTests(unittest.TestCase):
                 "not reviewed",
                 encoding="utf-8",
             )
-            (copied_root / "project-kit" / "surprise.md").write_text(
+            (copied_root / "starter-workspace" / "Lantern" / "surprise.md").write_text(
                 "not reviewed",
                 encoding="utf-8",
             )
 
-            skill_zip, project_zip, _ = build_release(
+            desktop_zip, skill_zip, _ = build_release(
                 copied_root,
                 Path(tmp) / "dist",
             )
@@ -55,9 +75,9 @@ class PackageTests(unittest.TestCase):
                     "lantern-life-manager/surprise.md",
                     archive.namelist(),
                 )
-            with zipfile.ZipFile(project_zip) as archive:
+            with zipfile.ZipFile(desktop_zip) as archive:
                 self.assertNotIn(
-                    "lantern-project-kit/surprise.md",
+                    "Lantern/surprise.md",
                     archive.namelist(),
                 )
 

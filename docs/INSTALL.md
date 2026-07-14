@@ -2,89 +2,64 @@
 
 [Back to the Lantern overview](../README.md)
 
-You do not need GitHub knowledge. **Lantern itself does not require Git** and **Lantern itself does not require Python**; manual Skill upload and the Project Kit require no developer software on macOS or Windows.
+Lantern 2 uses **one folder, one local Project, and one first prompt**. It supports the ChatGPT desktop app on macOS and Windows. It is **not supported on the web**.
 
-The downloads are public: you do not need a GitHub account, GitHub Desktop, the GitHub CLI, or a repository clone. Open the newest release page in an ordinary browser and download the ZIP you need.
+Lantern itself does not require Git. Lantern itself does not require Python. The starter folder needs no GitHub account, no Python installation, no Xcode, no Apple developer tools, no terminal, and no developer software. Codex may have unrelated platform prerequisites, but they are not required to use Lantern. Do not install GitHub Desktop. Do not install the GitHub CLI. Do not ask the user to create a GitHub account.
 
-## First: check for a Skills menu
+## 1. Download
 
-1. Open ChatGPT.
-2. Select your profile.
-3. Look for **Skills**.
+Open the [newest release](https://github.com/TheOGFlyingTesla/lantern-life-manager/releases/latest) and download:
 
-If you see it, use the Skill path. If you do not, use the Project Kit path. Both implement the same Lantern behavior.
+**`lantern-desktop-v2.0.0.zip`**
 
-## Path A: install the Lantern Skill
+Do not install a Skill for the normal setup. Ignore the optional Skill ZIP unless you already know you specifically want an installed Codex Skill.
 
-1. Download `lantern-life-manager-v1.2.0.zip` from the newest release.
-2. In ChatGPT, open **Profile → Skills → New skill → Upload from your computer**.
-3. Choose the ZIP without unzipping it.
-4. Review ChatGPT's scan result. Stop if ChatGPT blocks the package or shows an unexpected capability.
-5. Create a new Project named **Lantern — Life Manager**.
-6. Start a chat inside it and say **Help me set up Lantern.**
+## 2. Extract the folder
 
-The Skill is reusable across the separate Projects Lantern creates. Lantern shows the full starter map immediately, asks at most three setup questions, then prepares and verifies the complete framework before drilling into any one domain.
+### macOS
 
-## Path B: use the Lantern Project Kit
+Double-click the downloaded ZIP. Finder creates a folder named `Lantern`.
 
-Use this path when the Skills menu is absent.
+### Windows
 
-1. Download `lantern-project-kit-v1.2.0.zip` from the newest release.
-2. Unzip it by opening the downloaded file.
-3. Open `START_HERE.md`.
-4. Create a new ChatGPT Project named **Lantern — Life Manager**.
-5. Copy all of `LIFE_MANAGER_INSTRUCTIONS.md` into that Project's instructions.
-6. Upload the four template files or add them from ChatGPT Library.
-7. Start a chat inside the Project and say **Help me set up Lantern.**
+Right-click the ZIP, choose **Extract All**, and open the extracted folder.
 
-### Open the Project Kit on macOS or Windows
+Move the complete `Lantern` folder to a writable location you expect to keep using. Documents is a good default. An external drive is fine if it will be connected whenever you use Lantern. Avoid leaving the only copy in a temporary downloads-cleanup location.
 
-- **macOS:** double-click the ZIP in Downloads. Finder creates an extracted folder. Open `.md` instruction files in TextEdit or another plain-text editor, press **Command-A**, then **Command-C**.
-- **Windows:** right-click the ZIP, choose **Extract All**, and open the extracted folder. Open `.md` instruction files in Notepad or another plain-text editor, press **Ctrl-A**, then **Ctrl-C**. Do not try to upload files from inside the compressed ZIP view.
+Keep the entire Lantern folder together. Do not move its domain folders separately.
 
-In ChatGPT, open the target Project's **Project settings**, find its instructions field, and paste the entire instruction file. Replace `[DOMAIN NAME]` and `[DOMAIN ID]` before saving a domain Project. Upload each template to the Project that owns it and confirm the filename appears in that Project's files.
+## 3. Add one local Project
 
-To **verify the Project**, start a new chat there and ask: “What Lantern role, domain name, and domain ID do you have?” The Life Manager should identify itself as the Life Manager; a domain Project should report the values you entered. If it cannot, recheck the Project instructions before continuing.
+1. Open the ChatGPT desktop app and select **Work** or **Codex**.
+2. Open **Projects**.
+3. Choose the `+` or folder option for adding a **local Project**. The Open Folder shortcut is Cmd/Ctrl+O when available.
+4. Select the extracted `Lantern` folder—not an individual domain folder.
+5. Confirm that the Project shows files such as `AGENTS.md`, `START_HERE.md`, and `DASHBOARD.md`.
 
-Lantern starts with the documented starter Project map—one Project per life area—which the user may remove from, rename, or extend. It should prepare the complete Project list, stable domain IDs, coordinator instructions, templates, dashboard, and checkpoint before detailed domain work. For each domain Project, copy `DOMAIN_COORDINATOR_INSTRUCTIONS.md` into its Project instructions and replace the two bracketed domain fields. Then upload `domain-snapshot.md` and `work-request.md` to each domain Project, or paste their contents into a starter chat there. A separate domain Project cannot see files uploaded only to the Life Manager Project. If manual actions are required, Lantern should give one consolidated numbered list and then verify the framework-ready checklist—not stop after every file and wait for “continue.”
+You are adding one local Project. Do not create separate Projects for School, Career, Home, or every other domain.
 
-## During onboarding
+## 4. Start Lantern
 
-- Answer one question at a time.
-- Say **skip for now** for anything you do not want to answer.
-- Say **I don't know** when information is uncertain.
-- Stop whenever you want. Say **Help me recover Lantern** when you return.
+Create one new task in the Lantern Project and type exactly:
 
-Lantern should produce a useful dashboard and next-few-days plan before asking you to connect optional apps.
+> Start Lantern.
 
-## Optional: automate setup with Codex
+Lantern verifies the starter workspace, shows four short setup steps, and asks at most three questions. It must not answer those questions for you.
 
-If ChatGPT Work cannot create the complete Project structure directly and you already use Codex, follow [Set up Lantern with Codex](CODEX_ASSISTED_SETUP.md). Codex should try direct download and its bundled runtimes first.
+You do not need to initialize every domain. Focused coordinator tasks start on demand later, and the Life Manager remains fully useful by itself.
 
-The optional **Codex-assisted setup may require** prerequisites belonging to Codex or macOS. If Codex asks for Xcode Command Line Tools or Apple developer tools, it must explain the potentially large download before installation and offer the Project Kit as the no-toolchain alternative.
+## Updating from Lantern 1.x
 
-Lantern's manual setup should not ask you to install Git, Python, Xcode, Apple developer tools, Homebrew, or another developer toolchain. Codex should try direct download and bundled workspace tools first. If Codex itself genuinely requires a platform prerequisite, it should explain the cost and offer the Project Kit before installing anything.
+Do not delete useful 1.x information first.
 
-## Optional capabilities and apps
+1. Download and extract the Lantern 2 folder.
+2. Add it as one new local Project.
+3. Type `Start Lantern.` and finish the short setup.
+4. In an old 1.x chat or Project, ask: **Prepare one migration handoff containing only confirmed priorities, dates, decisions, blockers, next actions, and confidentiality boundaries. Do not delete or change the originals.**
+5. Download or copy that handoff. Either save it inside the new Lantern folder under `_Lantern/Imports/`, or paste it into the new Life Manager task.
+6. In Lantern 2, ask: **Migrate this handoff into the matching domain status files. Mark uncertain or stale information; do not invent missing facts or delete the originals.**
+7. Verify the new dashboard and domain status files before removing old cloud Projects, chats, Library files, or folders.
 
-Lantern may recommend built-in Computer Use, web research, Library, Scheduled Tasks, Study Mode, or document tools. It may suggest Gmail or Outlook, a calendar, storage backup, Slack, or Teams only if those match your life.
+## Updating Lantern 2 later
 
-You can skip every optional connection. Ask Lantern what an app can read or change before connecting it.
-
-## Update Lantern
-
-1. Download the newest matching ZIP.
-2. Keep your existing Project chats and snapshots.
-3. Replace the installed Skill, or replace the Project instructions with the new copies.
-4. Say **Check my Lantern setup after this update.**
-
-Lantern preserves old snapshots and creates migrated copies when its snapshot schema changes.
-
-## Remove Lantern
-
-- Skill path: uninstall or delete Lantern from the Skills page.
-- Project Kit path: remove the Lantern instructions from each Project.
-- Delete Projects or Library files only if you also want to delete your content.
-- Disconnect optional apps from ChatGPT Settings when you no longer want them connected.
-
-Removing Lantern does not automatically delete your chats, Projects, Library files, or third-party data.
+Download the newer workspace into a temporary location. Ask Lantern to compare the new templates with the current folder and preserve personal `STATUS.md`, `INBOX.md`, and dashboard content. Never overwrite the live folder blindly.

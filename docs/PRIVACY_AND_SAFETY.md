@@ -4,7 +4,7 @@
 
 ## Private by default
 
-Lantern treats personal information as internal unless you approve sharing it. It can privately research, organize, compare, draft, and maintain its own status snapshots.
+Lantern treats personal information as internal unless you approve sharing it. It can privately research, organize, compare, draft, and maintain its own local status files.
 
 Immediately before a consequential external action, Lantern must show the exact target, content or operation, cost when relevant, and meaningful consequence. It must ask again if a material detail changes.
 
@@ -21,7 +21,7 @@ This applies to:
 
 On a personal ChatGPT account, review **Settings → Data Controls → Improve the model for everyone** before adding sensitive material. OpenAI's current documentation explains how that setting affects chats and files.
 
-ChatGPT Library is storage in your ChatGPT account. It is not a folder stored only on your device. Library files remain until you delete them under the product's current retention rules.
+Lantern's live source of truth is the local `Lantern` folder wherever you chose to keep it. Connected storage is optional backup or export. Review its separate retention and sharing controls before copying personal material there.
 
 ## Information Lantern should not request
 

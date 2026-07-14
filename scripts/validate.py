@@ -14,6 +14,27 @@ REQUIRED_REPO_FILES = {
     "SECURITY.md",
     "CONTRIBUTING.md",
 }
+STARTER_DOMAINS = (
+    "Personal",
+    "Home",
+    "Career & Job Search",
+    "Work, Internships & Volunteering",
+    "School & Learning",
+    "Finances",
+    "Appointments & Admin",
+    "Health & Wellbeing",
+    "Relationships & Community",
+)
+REQUIRED_WORKSPACE_FILES = (
+    "AGENTS.md",
+    "START_HERE.md",
+    "DASHBOARD.md",
+    "LANTERN_VERSION.md",
+    "Domains/AGENTS.md",
+    "_Lantern/Templates/START_HERE.md",
+    "_Lantern/Templates/STATUS.md",
+    "_Lantern/Templates/INBOX.md",
+)
 
 
 def parse_frontmatter(path: Path) -> tuple[dict[str, str], str]:
@@ -61,6 +82,28 @@ def validate_skill(skill_dir: Path) -> list[str]:
     return findings
 
 
+def validate_workspace(workspace: Path) -> list[str]:
+    """Return structural findings for the primary desktop workspace."""
+    required = list(REQUIRED_WORKSPACE_FILES)
+    for domain in STARTER_DOMAINS:
+        required.extend(
+            f"Domains/{domain}/{filename}"
+            for filename in ("START_HERE.md", "STATUS.md", "INBOX.md")
+        )
+
+    findings = [
+        f"{workspace / relative}: missing"
+        for relative in required
+        if not (workspace / relative).is_file()
+    ]
+    findings.extend(
+        f"{workspace / relative}: symlinks are not allowed"
+        for relative in required
+        if (workspace / relative).is_symlink()
+    )
+    return findings
+
+
 def validate_repository(root: Path) -> list[str]:
     """Return structural findings for the release repository."""
     findings = [
@@ -68,6 +111,7 @@ def validate_repository(root: Path) -> list[str]:
         for name in sorted(REQUIRED_REPO_FILES)
         if not (root / name).is_file()
     ]
+    findings.extend(validate_workspace(root / "starter-workspace" / "Lantern"))
     findings.extend(validate_skill(root / "lantern-life-manager"))
     return findings
 

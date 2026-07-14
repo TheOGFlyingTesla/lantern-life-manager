@@ -1,54 +1,60 @@
 # Architecture and Coordination
 
-## Project topology
+## One local Project
 
-Create a separate Project for each substantial domain, such as School, Career, a job, an internship, a volunteer role, Money, Home, Wellbeing, Relationships, or Caregiving. Keep the Life Manager in its own Project.
+Lantern 2 is **local-first** and uses **one local Project** pointing at the downloaded `Lantern` root folder. The folder may live anywhere writable and dependable. No Git repository, GitHub account, database, cloud ChatGPT Project, or fixed `Documents/Lantern` path is required.
 
-Within a domain Project, use focused chats for concrete outcomes. The domain coordinator is the role that maintains domain truth; it is not one irreplaceable chat.
+```text
+Lantern/
+├── AGENTS.md
+├── START_HERE.md
+├── DASHBOARD.md
+├── LANTERN_VERSION.md
+├── _Lantern/
+│   └── Templates/
+└── Domains/
+    ├── AGENTS.md
+    ├── Personal/
+    ├── Home/
+    ├── Career & Job Search/
+    ├── Work, Internships & Volunteering/
+    ├── School & Learning/
+    ├── Finances/
+    ├── Appointments & Admin/
+    ├── Health & Wellbeing/
+    └── Relationships & Community/
+```
 
-## ChatGPT-native Hub
+Do not create cloud ChatGPT Projects. Do not create a Git repository. Cloud storage is optional backup only.
 
-Use compact append-only snapshots saved to ChatGPT Library as the version 1 exchange Hub. Library is ChatGPT-account storage, not a device-local filesystem or transactional database.
+## Durable domain handoffs
 
-After meaningful work, generate a snapshot from `assets/templates/domain-snapshot.md` with a stable domain ID and absolute timestamp. Use a predictable filename:
+Every domain owns:
 
-`lantern-<domain-id>-<YYYYMMDDTHHMMSSZ>.md`
+- `START_HERE.md` — its purpose;
+- `STATUS.md` — confirmed state, dates, blockers, and next action; and
+- `INBOX.md` — queued requests from the Life Manager.
 
-The Life Manager asks Library for the newest valid snapshot for each relevant domain. If automatic retrieval is unavailable, ask the user to select it from Library. If that fails, present a short copyable handoff. Never hide the fallback.
+The Life Manager reads all domain files because the single local Project points at the Lantern root. A focused task updates its domain `STATUS.md`; the manager later reads it. Tasks do not need to wake or directly message one another.
 
-Cross-Project memory may help but is not authoritative. A separate Project cannot wake a dormant chat in another Project or provide reliable direct messaging.
+Use `DASHBOARD.md` as the cross-domain overview. Mark information confirmed, stale, uncertain, blocked, or unknown. Never choose silently between conflicting facts.
 
-## Four coordination behaviors
+## Focused tasks on demand
 
-1. **Read:** Build the dashboard from the newest confirmed snapshots. Mark stale, uncertain, conflicting, or missing state.
-2. **Queue:** Write a self-contained request using `assets/templates/work-request.md`. The domain coordinator handles it on the next visit.
-3. **Handle directly:** Let the Life Manager complete small work when the snapshot contains enough context. Save the result to the correct domain.
-4. **Delegate when supported:** Propose a one-time Work job with a self-contained packet. The temporary worker is not the original chat. An optional single Dispatcher may monitor a connected-app queue, but it is off by default.
+The Life Manager is the only required task. Start domain coordinator tasks **on demand** when focused work would help. Do not create or pin one task per domain during initial setup.
 
-Scheduled Tasks cannot be assumed to read Project-uploaded files. Never allocate one task per domain. When background access is missing, leave the request safely queued.
+When a focused task stays at the Lantern root, explicitly read `Domains/AGENTS.md` and the named domain folder. When a task starts inside a domain folder, nested `AGENTS.md` discovery supplies the domain guidance automatically.
 
-## Freshness and conflicts
+## Add or archive domains
 
-Use `Last verified` and `Review after`. A dormant domain has no hidden internal progress, but external facts may have changed. The Life Manager may check connected calendars, email, or public sources when relevant and authorized, or ask the user to open that domain.
+Create new domains inside `Domains/` by copying the three files from `_Lantern/Templates/`. Replace placeholders without inventing user facts and add the domain to `DASHBOARD.md`. Preserve files when renaming. Archive or delete only with exact-action approval.
 
-When snapshots conflict, prefer neither silently. Identify the disagreement, compare verification dates and sources, use the newer evidence only when low-risk, and ask before a consequential decision.
+## Recovery
 
-## Recovery and migration
+For recovery, read `DASHBOARD.md` plus every relevant `STATUS.md` and `INBOX.md`. Separate confirmed information from stale, conflicting, or unknown information; ask the smallest necessary question; then update the affected files. These durable files replace the old onboarding checkpoint and `_Hub` architecture.
 
-When asked to recover:
+## Portable export and optional backup
 
-1. Find the newest valid onboarding checkpoint, dashboard, snapshots, and requests available.
-2. Separate confirmed facts from stale, uncertain, or contradictory material.
-3. Identify unfinished onboarding sections.
-4. Ask the smallest next question needed.
-5. Rebuild the dashboard and publish a new `lantern-onboarding/v1` recovery checkpoint plus any changed domain snapshots.
+The Lantern folder is already a portable export. For a smaller export, copy the latest dashboard, relevant domain status and inbox files, and the instruction files into a new folder. Ask before sharing it outside the user's private workspace.
 
-For a replacement coordinator, read Project instructions and the newest snapshot. For an old schema, preserve the original, create a migrated copy, record `Supersedes`, and ask before deleting anything.
-
-## Portable export
-
-When the user asks to export Lantern, create a portable export containing the latest dashboard, newest valid domain snapshots, open work requests, newest onboarding checkpoint, and the Life Manager and Domain Coordinator setup instructions. Include a short manifest that lists missing or stale items and the export time. Preserve the original files, exclude superseded duplicates unless requested, and keep confidential material out unless the user explicitly chooses to include it. Creating the private export is reversible; sharing it outside the user's private workspace requires exact-action approval.
-
-## External storage
-
-Treat Google Drive, OneDrive, SharePoint, Box, Notion, or similar apps as optional backup or automation bridges. Explain permissions and provider dependence. Do not make one the version 1 source of truth unless the user explicitly chooses it.
+External drives, Time Machine, OneDrive, Google Drive, and similar services may back up the folder. They are never required as Lantern's live source of truth.

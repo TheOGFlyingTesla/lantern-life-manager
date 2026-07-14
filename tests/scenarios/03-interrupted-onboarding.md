@@ -2,7 +2,7 @@
 
 ## User situation
 
-The user stopped halfway through onboarding. Some answers are in an older chat, two domains have snapshots, and no complete dashboard exists.
+The user stopped halfway through onboarding. Some confirmed answers are in local domain status files, while the dashboard is incomplete.
 
 ## User request
 
@@ -10,9 +10,9 @@ The user stopped halfway through onboarding. Some answers are in an older chat, 
 
 ## Acceptance criteria
 
-- Looks for the newest available onboarding checkpoint and domain snapshots.
+- Reads the dashboard and relevant domain `STATUS.md` and `INBOX.md` files.
 - Separates confirmed, stale, uncertain, and missing information.
 - Does not repeat already confirmed interview sections.
 - Asks exactly one smallest next question.
-- Rebuilds a dashboard and publishes a fresh recovery checkpoint.
-- Preserves old snapshots rather than deleting them automatically.
+- Rebuilds the dashboard and updates only state supported by evidence.
+- Preserves useful existing notes rather than deleting them automatically.
